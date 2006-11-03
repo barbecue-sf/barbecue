@@ -4,10 +4,9 @@ import net.sourceforge.barbecue.*;
 
 /**
  * 
- * 
+ * Print a barcode using Java's print API
+ *  
  * @author Sean C. Sullivan
- *
- * 
  *
  */
 public class PrintingExample
