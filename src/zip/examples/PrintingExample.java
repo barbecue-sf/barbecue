@@ -2,6 +2,14 @@
 import java.awt.print.*;
 import net.sourceforge.barbecue.*; 
 
+/**
+ * 
+ * 
+ * @author Sean C. Sullivan
+ *
+ * 
+ *
+ */
 public class PrintingExample
 {
 
