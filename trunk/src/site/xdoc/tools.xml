@@ -16,7 +16,8 @@
     <li><a href="http://tomcat.apache.org/">Tomcat</a></li>
     <li><a href="http://ant.apache.org/">Ant</a></li>
     <li><a href="http://maven.apache.org/">Maven</a></li>
-    <li><a href="http://en.wikipedia.org/wiki/Concurrent_Versions_System">CVS</a></li>
+    <li><a href="http://subversion.tigris.org/">Subversion</a></li>
+    <li><a href="http://subclipse.tigris.org/">Subclipse</a></li>
     <li><a href="http://www.junit.org/">JUnit</a></li>
     <li><a href="http://www.mozilla.com/firefox/">Firefox</a></li>
     <li><a href="http://java.sun.com/javase/downloads/index.jsp">Sun JDK 1.5</a></li>
