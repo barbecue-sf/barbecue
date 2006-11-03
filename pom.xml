@@ -26,6 +26,7 @@
   <url>http://sourceforge.net/tracker/?group_id=78049</url>
   </issueManagement>
 
+
   <distributionManagement>
   <site>
     <id>barbecue-website</id>
@@ -34,8 +35,9 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:cvs:pserver:anonymous@barbecue.cvs.sourceforge.net:/cvsroot/barbecue</connection>
-    <url>http://barbecue.cvs.sourceforge.net/barbecue</url>
+     <connection>scm:svn:https://svn.sourceforge.net/svnroot/barbecue</connection>
+     <developerConnection>scm:svn:https://svn.sourceforge.net/svnroot/barbecue</developerConnection>
+     <url>http://svn.sourceforge.net/viewcvs/barbecue/trunk/</url>
   </scm>
 
   <mailingLists>
