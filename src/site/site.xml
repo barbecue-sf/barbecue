@@ -10,6 +10,7 @@
       <item name="Home" href="/index.html"/>
       <item name="Download" href="http://sourceforge.net/project/showfiles.php?group_id=78049&amp;package_id=79085" />
       <item name="FAQ" href="/faq.html"/>
+      <item name="License" href="http://barbecue.svn.sourceforge.net/viewvc/barbecue/trunk/LICENSE.txt?view=markup" />
       <item name="View source" href="xref/index.html"/>
       <item name="Javadocs" href="apidocs/index.html"/>
       <item name="Screenshots" href="screenshots.html"/>
