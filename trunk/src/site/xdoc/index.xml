@@ -16,8 +16,7 @@ formats are supported and many more can be added via the flexible
 <a href="http://barbecue.sourceforge.net/apidocs/net/sourceforge/barbecue/BarcodeFactory.html">barcode API</a>. 
 Barcodes can be output to three different image formats (PNG, GIF, JPEG), 
 used <a href="images/screenshot-barcodetool.png">as a Swing component</a>, or 
-written out as SVG. Please use the links on the left to find out more 
-about Barbecue.</p>
+written out as SVG.</p>
    <p>
    <img src="images/example-code128.png" />
    </p>
