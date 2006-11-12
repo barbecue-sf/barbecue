@@ -6,7 +6,7 @@
   
   <faq id="license">
   	<question>What license does the Barbecue project use?</question>
-  	<answer>Barbecue has a BSD-style license. See <a href="http://barbecue.svn.sourceforge.net/viewvc/barbecue/trunk/LICENSE.txt?view=markup">LICENSE.txt</a></answer>
+  	<answer>Barbecue has a BSD-style license. See <a href="http://barbecue.svn.sourceforge.net/viewvc/barbecue/trunk/barbecue/LICENSE.txt?view=markup">LICENSE.txt</a></answer>
   </faq>
   
   <faq id="symbologies">
