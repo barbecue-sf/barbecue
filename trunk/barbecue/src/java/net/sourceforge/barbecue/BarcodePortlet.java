@@ -12,7 +12,8 @@ import net.sourceforge.barbecue.output.*;
  *  Barcode portlet
  *
  *  Note: this portlet uses features from  
- *        the Portlet 2.0 specification (JSR-286)
+ *        the Portlet 2.0 specification (JSR-286).
+ *        This portlet will not run in a Portlet 1.0 container.
  *        
  *  @author Sean Sullivan
  *
