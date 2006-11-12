@@ -29,7 +29,7 @@
   <faq id="printing">
     <question>How can I print a barcode?</question>
     <answer>
-      <p>See <a href="http://barbecue.svn.sourceforge.net/viewvc/barbecue/trunk/src/zip/examples/PrintingExample.java?view=markup">PrintingExample.java</a>
+      <p>See <a href="http://barbecue.svn.sourceforge.net/viewvc/barbecue/trunk/barbecue/src/zip/examples/PrintingExample.java?view=markup">PrintingExample.java</a>
       </p>
     </answer>
   </faq>
