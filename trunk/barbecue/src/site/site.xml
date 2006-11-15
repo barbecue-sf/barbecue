@@ -10,7 +10,7 @@
       <item name="Home" href="/index.html"/>
       <item name="Download" href="http://prdownloads.sourceforge.net/barbecue/barbecue-1.5-alpha2.zip?download" />
       <item name="FAQ" href="/faq.html"/>
-      <item name="License" href="http://barbecue.svn.sourceforge.net/viewvc/barbecue/trunk/LICENSE.txt?view=markup" />
+      <item name="License" href="http://barbecue.svn.sourceforge.net/viewvc/barbecue/trunk/barbecue/LICENSE.txt?view=markup" />
       <item name="View source" href="xref/index.html"/>
       <item name="Javadocs" href="apidocs/index.html"/>
       <item name="Screenshots" href="screenshots.html"/>
