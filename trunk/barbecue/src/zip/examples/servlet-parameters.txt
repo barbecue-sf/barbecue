@@ -1,3 +1,6 @@
+
+Servlet class: net.sourceforge.barbecue.BarcodeServlet
+
 Required parameters:
 --------------------
 
@@ -54,7 +57,7 @@ Examples:
 
 BarcodeServlet?data=12345
 BarcodeServlet?data=12345&width=3&height=100&resolution=100
-BarcodeServlet?data=12345&drawtext=yes
+BarcodeServlet?data=12345&drawText=yes
 BarcodeServlet?data=12345&type=Code128B
 BarcodeServlet?data=12345&type=UCC128&appid=402
 BarcodeServlet?data=12345&type=PDF417
