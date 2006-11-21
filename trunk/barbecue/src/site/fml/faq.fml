@@ -18,11 +18,18 @@
     </answer>
   </faq>
 
-  <faq id="whats-jre">
+  <faq id="what-jre">
     <question>What JRE's are supported?</question>
     <answer>
       <p>Barbecue 1.0.x requires JRE 1.3 or higher. Barbecue 1.5.x requires JRE 1.4 or higher.
       </p>
+    </answer>
+  </faq>
+
+  <faq id="output-formats">
+    <question>What output formats are supported?</question>
+    <answer>
+      <p>PNG, JPEG, GIF, SVG, and EPS</p>
     </answer>
   </faq>
 
