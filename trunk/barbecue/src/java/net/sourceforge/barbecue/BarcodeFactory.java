@@ -170,7 +170,7 @@ public final class BarcodeFactory {
      * followed by the lot number '012004', and an item AI (21) with item
      * number 000001.
      */
-    public static Barcode ParseEAN128(String encoded_data) throws BarcodeException {
+    public static Barcode parseEAN128(String encoded_data) throws BarcodeException {
         return new UCCEAN128Barcode(encoded_data);
     }
 
