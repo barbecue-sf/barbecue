@@ -35,7 +35,6 @@ import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.SeparatorModule;
 
 import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
 import java.util.List;
 import java.awt.*;
 
@@ -73,7 +72,7 @@ public class Int2of5BarcodeTest extends TestCase {
         Module[] modules = barcode.encodeData();
         assertEquals(4, modules.length);
         int index = 0;
-        StringCharacterIterator iter = new StringCharacterIterator(data);
+
         
         String bar;
         String space;
