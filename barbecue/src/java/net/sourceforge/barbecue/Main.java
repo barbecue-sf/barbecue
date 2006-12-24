@@ -80,25 +80,35 @@ public class Main
 		try
 		{
 			Barcode barcode = null;
-			// Always get a Barcode from the BarcodeFactory
+
 			if (encoding.equals("ean128"))
 			{
 				// barcode = BarcodeFactory.createEAN128(barcode_text);
-				barcode = BarcodeFactory.ParseEAN128(barcode_text);
+				barcode = BarcodeFactory.parseEAN128(barcode_text);
 			}
 			else if (encoding.equals("code128"))
+			{
 				barcode = BarcodeFactory.createCode128(barcode_text);
+			}
 			else
+			{
 				System.err.println("Unknown encoding");
+			}
 
 			if (null == barcode)
+			{
 				return;
+			}
 
 			OutputStream fos = null;
 			if (null != outfile)
+			{
 				fos = new FileOutputStream(outfile);
+			}
 			else
+			{
 				fos = System.out;
+			}
 
 			if (output_EPS)
 			{
