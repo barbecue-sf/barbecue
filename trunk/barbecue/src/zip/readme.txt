@@ -115,4 +115,4 @@ There are lots of things that can be done to improve Barbecue:
 ---------------
 
 If Barbecue doesn't do what you need, then change it! Go to barbecue.sourceforge.net for
-more imformation.
+more information.
