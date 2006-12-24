@@ -225,7 +225,7 @@ public class BarcodeServlet extends HttpServlet {
 
 		for (int i = 0; i < methods.length; i++) {
 			Method method = methods[i];
-			if (matches(method, type)) {
+			if ((method.getParameterTypes().length == 1) && matches(method, type)) {
 				return method;
 			}
 		}
