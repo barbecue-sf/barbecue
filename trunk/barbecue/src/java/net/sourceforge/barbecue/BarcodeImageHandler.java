@@ -47,10 +47,11 @@ public final class BarcodeImageHandler {
 	
 	static
 	{
-		formats = new HashSet();
-		formats.add("gif");
-		formats.add("jpeg");
-		formats.add("png");
+		Set s = new HashSet();
+		s.add("gif");
+		s.add("jpeg");
+		s.add("png");
+		formats = Collections.unmodifiableSet(s);
 	}
 	
 	static public Set getImageFormats()
