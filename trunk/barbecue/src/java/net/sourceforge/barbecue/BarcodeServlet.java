@@ -42,7 +42,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * The query parameters for this servlet are:
  * <ol>
- * <li>value, required, example: "1234567890"
+ * <li>data, required, example: "1234567890"
  * <li>type, optional, examples: "Code128A", "Code128B", "Code128C", if left blank will default to Code 128 B.
  * Note that the type here must be <b>exactly</b> the name of one of the createX methods on BarcodeFactory without
  * the "create" prefix. This is case sensitive.
@@ -55,7 +55,7 @@ import java.lang.reflect.InvocationTargetException;
  * <li>drawText, optional and only takes effect if headless is "false", set to "false" for no text
  * </ol>
  *
- * <p>Example URL: <code>http://hostname:80/myapp/BarcodeServlet?value=12345&amp;type=Code128A</code>
+ * <p>Example URL: <code>http://hostname:80/myapp/BarcodeServlet?data=12345&amp;type=Code128A</code>
  * </p>
  * 
  * <p>Contributed by Robert Chou &lt;rchou at users.sourceforge.net&gt;</p>
