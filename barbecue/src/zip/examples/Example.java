@@ -4,11 +4,12 @@ import net.sourceforge.barbecue.BarcodeFactory;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeImageHandler;
+import net.sourceforge.barbecue.output.OutputException;
 
 import java.awt.image.BufferedImage;
 import java.awt.*;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+
 
 public class Example {
 
@@ -30,7 +31,7 @@ public class Example {
 		panel.add(barcode);
 	}
 
-	public void drawingBarcodeDirectToGraphics() throws BarcodeException {
+	public void drawingBarcodeDirectToGraphics() throws BarcodeException, OutputException {
 		// Always get a Barcode from the BarcodeFactory
 		Barcode barcode = BarcodeFactory.createCode128B("My Barcode");
 
@@ -46,7 +47,7 @@ public class Example {
 	}
 
     public void outputtingBarcodeAsPNG() throws BarcodeException {
-        // Always get a Barcode from the BarcodeFactory
+        // get a Barcode from the BarcodeFactory
 		Barcode barcode = BarcodeFactory.createCode128B("My Barcode");
 
         try {
