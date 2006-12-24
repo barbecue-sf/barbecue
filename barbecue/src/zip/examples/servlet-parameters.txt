@@ -40,6 +40,8 @@ Code39
 3of9
 USD3
 Codabar
+Std2of5
+Int2of5
 USD4
 NW7
 Monarch
