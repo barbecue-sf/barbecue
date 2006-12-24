@@ -166,6 +166,8 @@ public class BarcodeServletTest extends BarcodeTestCase {
         assertCanGenerateBarcodeInServlet("GlobalTradeItemNumber");
         assertCanGenerateBarcodeInServlet("PDF417");
         assertCanGenerateBarcodeInServlet("Code39");
+        assertCanGenerateBarcodeInServlet("Std2of5");
+        assertCanGenerateBarcodeInServlet("Int2of5");
         assertCanGenerateBarcodeInServlet("3of9");
         assertCanGenerateBarcodeInServlet("USD3");
         assertCanGenerateBarcodeInServlet("USD4");
