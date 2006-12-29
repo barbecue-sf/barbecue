@@ -83,16 +83,27 @@ public class Main
 
 			if (encoding.equals("ean128"))
 			{
-				// barcode = BarcodeFactory.createEAN128(barcode_text);
 				barcode = BarcodeFactory.parseEAN128(barcode_text);
 			}
 			else if (encoding.equals("code128"))
 			{
 				barcode = BarcodeFactory.createCode128(barcode_text);
 			}
+			else if (encoding.equals("upca"))
+			{
+				barcode = BarcodeFactory.createUPCA(barcode_text);
+			}
+			else if (encoding.equals("codabar"))
+			{
+				barcode = BarcodeFactory.createCodabar(barcode_text);
+			}
+			else if (encoding.equals("ean13"))
+			{
+				barcode = BarcodeFactory.createEAN13(barcode_text);
+			}
 			else
 			{
-				System.err.println("Unknown encoding");
+				System.err.println("Unknown encoding: " + encoding);
 			}
 
 			if (null == barcode)
