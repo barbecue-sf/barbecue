@@ -11,3 +11,5 @@ bin
 *.gif
 *.jpg
 *.log
+*.eps
+
