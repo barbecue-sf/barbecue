@@ -35,9 +35,9 @@
   </distributionManagement>
 
   <scm>
-     <connection>scm:svn:https://svn.sourceforge.net/svnroot/barbecue</connection>
-     <developerConnection>scm:svn:https://svn.sourceforge.net/svnroot/barbecue</developerConnection>
-     <url>http://svn.sourceforge.net/viewvc/barbecue/trunk/</url>
+     <connection>scm:svn:https://barbecue.svn.sourceforge.net/svnroot/barbecue</connection>
+     <developerConnection>scm:svn:https://barbecue.svn.sourceforge.net/svnroot/barbecue</developerConnection>
+     <url>http://barbecue.svn.sourceforge.net/viewvc/barbecue/trunk/</url>
   </scm>
 
   <mailingLists>
