@@ -45,6 +45,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.print.PrinterJob;
 
 /**
  * Contributed by Ryan Martell.
@@ -118,16 +119,43 @@ public class BarcodeTool extends JFrame {
         });
 	}
 
-	private void setBarcode(Component code) {
+	private void setBarcode(final Barcode bar) {
+		
+		JMenuItem printMenuItem = new JMenuItem();
+		printMenuItem.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e)
+			{
+				PrinterJob job = PrinterJob.getPrinterJob();
+				job.setPrintable(bar);
+				if (job.printDialog())
+				{
+					try
+					{
+						job.print();
+					}
+					catch (Exception ex)
+					{
+						// ignore
+					}
+				}
+			}
+			
+		});
+		
+		JPopupMenu popup = new JPopupMenu();
+		popup.add(printMenuItem);
+		bar.add(popup);
+		
         if(barcodePanel.getComponentCount() > 0) {
 			Rectangle existingBounds = ((Barcode) barcodePanel.getComponent(0)).getBounds();
             barcodePanel.removeAll();
-            barcodePanel.add(code);
-			Rectangle newBounds = ((Barcode) code).getBounds();
+            barcodePanel.add(bar);
+			Rectangle newBounds = ((Barcode) bar).getBounds();
             existingBounds.add(newBounds);
             barcodePanel.repaint(existingBounds);
         } else {
-            barcodePanel.add(code);
+            barcodePanel.add(bar);
             barcodePanel.revalidate();
         }
     }
@@ -154,12 +182,10 @@ public class BarcodeTool extends JFrame {
 			setBarcode(b);
 		} else {
             try {
-                Class factory = Class.forName("net.sourceforge.barbecue.BarcodeFactory");
+                Class factory = net.sourceforge.barbecue.BarcodeFactory.class;
 				Method createMethod = factory.getMethod("create" + currentValue, new Class[]{ "".getClass() });
 				Object result = createMethod.invoke(null, new Object[]{ barcodeText });
-                setBarcode((java.awt.Component) result);
-			} catch(ClassNotFoundException e) {
-				throw new RuntimeException(e.getMessage());
+                setBarcode((Barcode) result);
             } catch(NoSuchMethodException e) {
 				throw new RuntimeException(e.getMessage());
             } catch(IllegalAccessException e) {
