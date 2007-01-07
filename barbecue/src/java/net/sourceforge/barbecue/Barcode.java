@@ -34,10 +34,17 @@ import net.sourceforge.barbecue.output.OutputException;
 import net.sourceforge.barbecue.output.SizingOutput;
 
 import javax.swing.*;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
@@ -64,8 +71,20 @@ public abstract class Barcode extends JComponent
     private int x;
     private int y;
     private int resolution = -1;
+    private boolean popupMenuEnabled;
+    private PopupMenu popupMenu;
+    
+    public boolean isPopupMenuEnabled()
+	{
+		return popupMenuEnabled;
+	}
 
-    protected Barcode(String data) throws BarcodeException {
+	public void setPopupMenuEnabled(boolean b)
+	{
+		this.popupMenuEnabled = b;
+	}
+
+	protected Barcode(String data) throws BarcodeException {
         if (data == null || data.length() == 0) {
             throw new BarcodeException("Data to encode cannot be empty");
         }
@@ -82,6 +101,26 @@ public abstract class Barcode extends JComponent
         setForeground(Color.black);
         setOpaque(true);
 
+        this.popupMenu = new PopupMenu(this);
+        
+        this.addMouseListener(new MouseAdapter() {
+        	public void mousePressed(MouseEvent e)
+        	{
+        		if (e.isPopupTrigger() && isPopupMenuEnabled())
+        		{
+        			popupMenu.setVisible(true);
+        		}
+        	}
+        	
+        	public void mouseReleased(MouseEvent e)
+        	{
+        		if (e.isPopupTrigger())
+        		{
+        			popupMenu.setVisible(false);
+        		}
+        	}
+        });
+        
         invalidateSize();
     }
 
@@ -456,4 +495,38 @@ public abstract class Barcode extends JComponent
     {
     	return this.getData();
     }
+    
+    static private class PopupMenu extends JPopupMenu
+    {
+
+	   	public PopupMenu(final Barcode b)
+	    {
+			JMenuItem printMenuItem = new JMenuItem("Print...");
+			printMenuItem.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent e)
+				{
+					PrinterJob job = PrinterJob.getPrinterJob();
+					job.setPrintable(b);
+					if (job.printDialog())
+					{
+						try
+						{
+							job.print();
+						}
+						catch (Exception ex)
+						{
+							// ignore
+						}
+					}
+				}
+				
+			});
+    			
+			this.add(printMenuItem);
+    	}
+    }
+    
+
+    
 }
