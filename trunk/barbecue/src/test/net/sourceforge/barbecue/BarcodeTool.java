@@ -41,6 +41,8 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionListener;
@@ -121,31 +123,8 @@ public class BarcodeTool extends JFrame {
 
 	private void setBarcode(final Barcode bar) {
 		
-		JMenuItem printMenuItem = new JMenuItem();
-		printMenuItem.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e)
-			{
-				PrinterJob job = PrinterJob.getPrinterJob();
-				job.setPrintable(bar);
-				if (job.printDialog())
-				{
-					try
-					{
-						job.print();
-					}
-					catch (Exception ex)
-					{
-						// ignore
-					}
-				}
-			}
-			
-		});
 		
-		JPopupMenu popup = new JPopupMenu();
-		popup.add(printMenuItem);
-		bar.add(popup);
+		bar.setPopupMenuEnabled(true);
 		
         if(barcodePanel.getComponentCount() > 0) {
 			Rectangle existingBounds = ((Barcode) barcodePanel.getComponent(0)).getBounds();
