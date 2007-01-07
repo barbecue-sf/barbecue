@@ -71,7 +71,7 @@ public abstract class Barcode extends JComponent
     private int x;
     private int y;
     private int resolution = -1;
-    private boolean popupMenuEnabled;
+    private boolean popupMenuEnabled = false;
     private PopupMenu popupMenu;
     
     public boolean isPopupMenuEnabled()
