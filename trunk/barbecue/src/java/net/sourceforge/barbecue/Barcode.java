@@ -71,18 +71,6 @@ public abstract class Barcode extends JComponent
     private int x;
     private int y;
     private int resolution = -1;
-    private boolean popupMenuEnabled = false;
-    private PopupMenu popupMenu;
-    
-    public boolean isPopupMenuEnabled()
-	{
-		return popupMenuEnabled;
-	}
-
-	public void setPopupMenuEnabled(boolean b)
-	{
-		this.popupMenuEnabled = b;
-	}
 
 	protected Barcode(String data) throws BarcodeException {
         if (data == null || data.length() == 0) {
@@ -101,25 +89,6 @@ public abstract class Barcode extends JComponent
         setForeground(Color.black);
         setOpaque(true);
 
-        this.popupMenu = new PopupMenu(this);
-        
-        this.addMouseListener(new MouseAdapter() {
-        	public void mousePressed(MouseEvent e)
-        	{
-        		if (e.isPopupTrigger() && isPopupMenuEnabled())
-        		{
-        			popupMenu.setVisible(true);
-        		}
-        	}
-        	
-        	public void mouseReleased(MouseEvent e)
-        	{
-        		if (e.isPopupTrigger())
-        		{
-        			popupMenu.setVisible(false);
-        		}
-        	}
-        });
         
         invalidateSize();
     }
@@ -494,37 +463,6 @@ public abstract class Barcode extends JComponent
     public String toString()
     {
     	return this.getData();
-    }
-    
-    static private class PopupMenu extends JPopupMenu
-    {
-
-	   	public PopupMenu(final Barcode b)
-	    {
-			JMenuItem printMenuItem = new JMenuItem("Print...");
-			printMenuItem.addActionListener(new ActionListener() {
-	
-				public void actionPerformed(ActionEvent e)
-				{
-					PrinterJob job = PrinterJob.getPrinterJob();
-					job.setPrintable(b);
-					if (job.printDialog())
-					{
-						try
-						{
-							job.print();
-						}
-						catch (Exception ex)
-						{
-							// ignore
-						}
-					}
-				}
-				
-			});
-    			
-			this.add(printMenuItem);
-    	}
     }
     
 
