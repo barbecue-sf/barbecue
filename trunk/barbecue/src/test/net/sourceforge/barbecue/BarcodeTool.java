@@ -124,8 +124,6 @@ public class BarcodeTool extends JFrame {
 	private void setBarcode(final Barcode bar) {
 		
 		
-		bar.setPopupMenuEnabled(true);
-		
         if(barcodePanel.getComponentCount() > 0) {
 			Rectangle existingBounds = ((Barcode) barcodePanel.getComponent(0)).getBounds();
             barcodePanel.removeAll();
