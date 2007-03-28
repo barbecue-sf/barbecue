@@ -27,12 +27,6 @@
 package net.sourceforge.barbecue;
 
 import junit.framework.TestCase;
-import net.sourceforge.barbecue.Modulo10;
-
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
-import java.util.List;
-import java.awt.*;
 
 public class Modulo10Test extends TestCase {
     
