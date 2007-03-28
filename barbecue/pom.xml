@@ -62,6 +62,12 @@
       <email>sean --*-- seansullivan --*-- com</email>
       <organization></organization>
     </developer>
+    <developer>
+      <name>Werner Keil</name>
+      <id>keilw</id>
+      <email>keilw --*-- users.sf.net</email>
+      <organization></organization>
+    </developer>
   </developers>
 
   <dependencies>
