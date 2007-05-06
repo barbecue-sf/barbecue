@@ -5,7 +5,7 @@ public class CenteredLabelLayout extends LabelLayout {
     public static final int BARS_TEXT_VGAP = 5;
 
 	public CenteredLabelLayout(int x, int y, int width) {
-		super(x, y, width, NOT_SET);
+		super(x, y, width, BARS_TEXT_VGAP);
 	}
 
 	protected void calculate() {
