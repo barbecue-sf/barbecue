@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Header: /cvsroot/barbecue/barbecue/src/site/site.xml,v 1.5 2006/09/22 03:40:30 sullis Exp $ -->
-<project name="barbecue">
+<!-- $Header: /cvsroot/diaz/diaz/src/site/site.xml,v 1.5 2006/09/22 03:40:30 sullis Exp $ -->
+<project name="diaz">
   <body>
     <links>
-      <item name="barbecue" href="http://www.sourceforge.net/projects/barbecue/" />
+      <item name="diaz" href="http://www.sourceforge.net/projects/diaz/" />
     </links>
 
-    <menu name="barbecue">
+    <menu name="diaz">
       <item name="Home" href="/index.html"/>
-      <item name="Download" href="http://prdownloads.sourceforge.net/barbecue/barbecue-1.5-beta1.zip?download" />
+      <item name="Download" href="http://prdownloads.sourceforge.net/diaz/diaz-0.2.zip?download" />
       <item name="FAQ" href="/faq.html"/>
-      <item name="License" href="http://barbecue.svn.sourceforge.net/viewvc/barbecue/trunk/barbecue/LICENSE.txt?view=markup" />
-      <item name="Donate" href="http://sourceforge.net/donate/index.php?group_id=78049" />
+      <item name="License" href="http://diaz.svn.sourceforge.net/viewvc/diaz/trunk/diaz/LICENSE.txt?view=markup" />
       <item name="View source" href="xref/index.html"/>
       <item name="Javadocs" href="apidocs/index.html"/>
-      <item name="Screenshots" href="screenshots.html"/>
       <item name="Tools and libraries" href="/tools.html"/>
       <item name="Related" href="/related.html"/>
       <item name="Credits" href="/credits.html"/>
-      <item name="SourceForge" href="http://sourceforge.net/projects/barbecue/"/>
+      <item name="SourceForge" href="http://sourceforge.net/projects/diaz/"/>
     </menu>
 
     ${reports}
