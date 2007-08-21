@@ -10,22 +10,14 @@
 
   <section name="Overview">
     <p>
-diaz is an open-source, Java library that provides the means to 
-create barcodes for printing and display in Java applications. A number of barcode 
-formats are supported and many more can be added via the flexible 
-<a href="http://diaz.sourceforge.net/apidocs/net/sourceforge/diaz/BarcodeFactory.html">barcode API</a>. 
-Barcodes can be output to three different image formats (PNG, GIF, JPEG), 
-used <a href="images/screenshot-barcodetool.png">as a Swing component</a>, or 
-written out as SVG.</p>
-   <p>
-   <img src="images/example-code128.png" />
-   </p>
+diaz is an open-source, Java library. The library contains a few simple classes that facilitate construction of DAO classes</p>
    </section>
    
   <section name="News">
     <p>
 <ul>
-<li>August 20, 2007</li>
+<li>August 20, 2007 - source code migrated from CVS to Subversion</li>
+<li>February 7, 2005 - project founded</li>
 </ul>
     </p>
     
