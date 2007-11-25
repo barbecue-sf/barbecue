@@ -36,9 +36,13 @@ import net.sourceforge.barbecue.output.OutputException;
 /**
  * Utility class to provide convenience methods for converting barcodes
  * to images and other misc barcode handling.
+ * 
+ * It generates <b>screen</b> images in an AWT Environment. Images optimized 
+ * for other environments or outputs are currently not provided.
  *
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  * @author Sean Sullivan
+ * @author <a href="mailto:keilw@users.sourceforge.net">Werner Keil</a>
  * 
  */
 public final class BarcodeImageHandler {
