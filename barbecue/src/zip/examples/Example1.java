@@ -1,4 +1,6 @@
+// This is a JPEG image generation example
 
+// TODO merge into Example.java
 
 import java.io.*;
 
@@ -18,9 +20,6 @@ import net.sourceforge.barbecue.env.EnvironmentFactory;
 public class Example1 {
 
 	public void outputtingBarcodeAsJPEG() throws BarcodeException {
-
-        System.out.println("Hello World!");
-
 		  
 
 		try {

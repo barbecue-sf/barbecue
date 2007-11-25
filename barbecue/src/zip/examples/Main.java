@@ -1,7 +1,9 @@
 import net.sourceforge.barbecue.BarcodeException;
 
-/**
+/*
  * Test Harness for calling examples
+ * 
+ * TODO add guidelines or instructions similar to the Barbecue Main runner class.
  */
 
 /**
@@ -23,9 +25,9 @@ public class Main {
 				Example1 e1 = new Example1();
 				e1.outputtingBarcodeAsJPEG();
 			}
-			catch (BarcodeException er) {
+			catch (BarcodeException be) {
 
-	        System.out.println("Error: "+er.getMessage());// Error handling
+	        System.out.println("Error: "+be.getMessage());// Error handling
 
 	        }
 
