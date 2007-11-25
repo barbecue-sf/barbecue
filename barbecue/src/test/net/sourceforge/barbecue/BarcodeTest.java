@@ -147,7 +147,7 @@ public class BarcodeTest extends TestCase {
 	}
 
 	public void testSettingResolutionOverridesDefaultResolution() throws Exception {
-		int resolution = 300;
+		int resolution = 42;
 		BarcodeMock barcode = new BarcodeMock("12345");
 		barcode.setResolution(resolution);
 		assertEquals(resolution, barcode.getResolution());
