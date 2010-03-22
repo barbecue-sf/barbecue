@@ -33,56 +33,59 @@ import java.awt.*;
 // Note: Deliberately not a BarcodeTestCase
 public class EnvironmentFactoryTest extends TestCase {
 
-	public void testHeadlessEnvironmentReturnedOnHeadlessMachine() throws Exception {
-		EnvironmentFactory.setDefaultEnvironment(new UnsupportedEnvironment());
-		assertTrue(EnvironmentFactory.getEnvironment() instanceof HeadlessEnvironment);
-		EnvironmentFactory.setDefaultEnvironment(new ErrorEnvironment());
-		assertTrue(EnvironmentFactory.getEnvironment() instanceof HeadlessEnvironment);
-	}
+    public void testHeadlessEnvironmentReturnedOnHeadlessMachine()
+            throws Exception {
+        EnvironmentFactory.setDefaultEnvironment(new UnsupportedEnvironment());
+        assertTrue(EnvironmentFactory.getEnvironment() instanceof HeadlessEnvironment);
+        EnvironmentFactory.setDefaultEnvironment(new ErrorEnvironment());
+        assertTrue(EnvironmentFactory.getEnvironment() instanceof HeadlessEnvironment);
+    }
 
-	public void testDefaultEnvironmentCanBeOverridden() throws Exception {
-		EnvironmentFactory.setDefaultEnvironment(new TestEnvironment());
-		assertTrue(EnvironmentFactory.getEnvironment() instanceof TestEnvironment);
-		assertEquals(69, EnvironmentFactory.getEnvironment().getResolution());
-	}
+    public void testDefaultEnvironmentCanBeOverridden() throws Exception {
+        EnvironmentFactory.setDefaultEnvironment(new TestEnvironment());
+        assertTrue(EnvironmentFactory.getEnvironment() instanceof TestEnvironment);
+        assertEquals(69, EnvironmentFactory.getEnvironment().getResolution());
+    }
 
     public void testNonAWTModeAlwaysReturnsNonAWTEnvironment() throws Exception {
         EnvironmentFactory.setNonAWTMode(68);
         assertTrue(EnvironmentFactory.getEnvironment() instanceof NonAWTEnvironment);
     }
 
-    public void testSettingNonAWTModeWithNoResolutionUsesHeadlessEnvironmentDefaultResolution() throws Exception {
+    public void testSettingNonAWTModeWithNoResolutionUsesHeadlessEnvironmentDefaultResolution()
+            throws Exception {
         EnvironmentFactory.setNonAWTMode();
-        assertEquals(HeadlessEnvironment.DEFAULT_RESOLUTION, EnvironmentFactory.getEnvironment().getResolution());
+        assertEquals(HeadlessEnvironment.DEFAULT_RESOLUTION, EnvironmentFactory
+                .getEnvironment().getResolution());
     }
 
-	private class UnsupportedEnvironment implements Environment {
-		public int getResolution() {
-			throw new UnsupportedOperationException();
-		}
+    private class UnsupportedEnvironment implements Environment {
+        public int getResolution() {
+            throw new UnsupportedOperationException();
+        }
 
         public Font getDefaultFont() {
             throw new UnsupportedOperationException();
         }
-	}
+    }
 
-	private class ErrorEnvironment implements Environment {
-		public int getResolution() {
-			throw new InternalError();
-		}
+    private class ErrorEnvironment implements Environment {
+        public int getResolution() {
+            throw new InternalError();
+        }
 
         public Font getDefaultFont() {
             throw new InternalError();
         }
-	}
+    }
 
-	private class TestEnvironment implements Environment {
-		public int getResolution() {
-			return 69;
-		}
+    private class TestEnvironment implements Environment {
+        public int getResolution() {
+            return 69;
+        }
 
         public Font getDefaultFont() {
             return null;
         }
-	}
+    }
 }
