@@ -89,6 +89,7 @@ public class Std2of5Barcode extends LinearBarcode {
      * @return The encoded bar data
      */
     protected Module[] encodeData() {
+        String data = getData();
         List modules = new ArrayList();
         
         for(int i = 0; i < data.length(); i++) {
@@ -125,6 +126,7 @@ public class Std2of5Barcode extends LinearBarcode {
     }
     
     protected void validateData() throws BarcodeException {
+        String data = getData();
         int index = 0;
         StringBuffer buf = new StringBuffer();
         StringCharacterIterator iter = new StringCharacterIterator(data);
@@ -138,6 +140,6 @@ public class Std2of5Barcode extends LinearBarcode {
             }
             index += 1;
         }
-        data = buf.toString();
+        setData(buf.toString());
     }
 }

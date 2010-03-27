@@ -41,6 +41,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -49,87 +50,93 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
 /**
- * Abstract barcode class that provides functionality that is common to
- * all barcodes. Specific barcode implementations must subclass
- * this and provide information specific to the barcode type they are implementing.
- *
+ * Abstract barcode class that provides functionality that is common to all
+ * barcodes. Specific barcode implementations must subclass this and provide
+ * information specific to the barcode type they are implementing.
+ * 
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
-public abstract class Barcode extends JComponent 
-	implements Printable {
+public abstract class Barcode extends JComponent implements Printable {
 
-    private static final int DEFAULT_BAR_HEIGHT = 50;
+    private static final int MIN_BAR_HEIGHT      = 0;
+    private static final int DEFAULT_BAR_HEIGHT  = 30;
 
-    protected String data;
-    protected String label;
-    protected boolean drawingText;
-    protected boolean drawingQuietSection = true;
-    protected int barWidth = 2;
-    protected int barHeight;
-    private Font font;
-    private Dimension size;
-    private int x;
-    private int y;
-    private int resolution = -1;
+    private String           data;
+    private String           label;
+    private boolean          drawingText;
+    private boolean          drawingQuietSection = true;
+    private int              barWidth            = 2;
+    private int              barHeight           = DEFAULT_BAR_HEIGHT;
+    private int              resolution          = -1;
 
-	protected Barcode(String data) throws BarcodeException {
+    protected Barcode(String data) throws BarcodeException {
         if (data == null || data.length() == 0) {
             throw new BarcodeException("Data to encode cannot be empty");
         }
         this.data = data;
-        int minHeight = calculateMinimumBarHeight(getResolution());
-        if (minHeight > 0) {
-            this.barHeight = minHeight;
-        } else {
-            this.barHeight = Barcode.DEFAULT_BAR_HEIGHT;
-        }
-        this.font = EnvironmentFactory.getEnvironment().getDefaultFont();
         this.drawingText = true;
         setBackground(Color.white);
         setForeground(Color.black);
         setOpaque(true);
-
-        
-        invalidateSize();
     }
 
     /**
      * Returns the data that the barcode is coding for.
-     *
+     * 
      * @return The barcode raw data
      */
     public String getData() {
         return data;
     }
 
-    /**
-     * Sets the font to use when drawing the barcode data string underneath the barcode.
-     * <p/> Note that changing this setting after a barcode has been drawn will invalidate the
-     * component and may force a refresh.
-     *
-     * @param font The font to use
-     */
-    public void setFont(Font font) {
-        this.font = font;
-        invalidateSize();
+    public int getBarWidth() {
+        return barWidth;
+    }
+
+    protected void setData(String data) {
+        if (data == null) {
+            data = "";
+        }
+        this.data = data;
+        update();
+    }
+    
+    public void update() {        
+        invalidate();
+        updateUI();
+        repaint();
+    }
+
+    public void setPreferredBarHeight(int height) {
+        if (height < MIN_BAR_HEIGHT) {
+            height = MIN_BAR_HEIGHT;
+        }
+        barHeight = height;
+    }
+
+    public int getPreferredBarHeight() {
+        return barHeight;
     }
 
     /**
-     * Indicates whether the barcode data should be shown as a string underneath the
-     * barcode or not.
-     * <p/> Note that changing this setting after a barcode has been drawn will invalidate the
-     * component and may force a refresh.
-     *
-     * @param drawingText True if the text should be shown, false if not
+     * Indicates whether the barcode data should be shown as a string underneath
+     * the barcode or not.
+     * <p/>
+     * Note that changing this setting after a barcode has been drawn will
+     * update the component and may force a refresh.
+     * 
+     * @param drawingText
+     *            True if the text should be shown, false if not
      */
     public void setDrawingText(boolean drawingText) {
         this.drawingText = drawingText;
-        invalidateSize();
+        update();
     }
 
     /**
-     * Indicates whether the barcode is drawing a text label underneath the barcode or not.
-     *
+     * Indicates whether the barcode is drawing a text label underneath the
+     * barcode or not.
+     * 
      * @return True if the text is drawn, false otherwise
      */
     public boolean isDrawingText() {
@@ -137,20 +144,25 @@ public abstract class Barcode extends JComponent
     }
 
     /**
-     * Indicates whether the leading and trailing white space should be rendered.
-     * <p/> Note that changing this setting after a barcode has been drawn will invalidate the
-     * component and may force a refresh.
-     *
-     * @param drawingQuietSection True if the quiet area/white space should be shown, false if not
+     * Indicates whether the leading and trailing white space should be
+     * rendered.
+     * <p/>
+     * Note that changing this setting after a barcode has been drawn will
+     * update the component and may force a refresh.
+     * 
+     * @param drawingQuietSection
+     *            True if the quiet area/white space should be shown, false if
+     *            not
      */
     public void setDrawingQuietSection(boolean drawingQuietSection) {
         this.drawingQuietSection = drawingQuietSection;
-        invalidateSize();
+        update();
     }
 
     /**
-     * Indicates whether the barcode is drawing leading and trailing white space/quiet area.
-     *
+     * Indicates whether the barcode is drawing leading and trailing white
+     * space/quiet area.
+     * 
      * @return True if the quiet area/white space is drawn, false otherwise
      */
     public boolean isDrawingQuietSection() {
@@ -158,12 +170,15 @@ public abstract class Barcode extends JComponent
     }
 
     /**
-     * Sets the desired bar width for the barcode. This is the width (in pixels) of the
-     * thinnest bar in the barcode. Other bars will change their size relative to this.
-     * <p/> Note that changing this setting after a barcode has been drawn will invalidate the
-     * component and may force a refresh.
-     *
-     * @param barWidth The desired width of the thinnest bar in pixels
+     * Sets the desired bar width for the barcode. This is the width (in pixels)
+     * of the thinnest bar in the barcode. Other bars will change their size
+     * relative to this.
+     * <p/>
+     * Note that changing this setting after a barcode has been drawn will
+     * update the component and may force a refresh.
+     * 
+     * @param barWidth
+     *            The desired width of the thinnest bar in pixels
      */
     public void setBarWidth(int barWidth) {
         if (barWidth >= 1) {
@@ -171,163 +186,93 @@ public abstract class Barcode extends JComponent
         } else {
             this.barWidth = 1;
         }
-        invalidateSize();
     }
 
     /**
-     * Sets the desired height for the bars in the barcode (in pixels). Note that some
-     * barcode implementations will not allow the height to go below a minimum size. This
-     * is not the height of the component as a whole, as it does not specify the height of
-     * any text that may be drawn and does not include borders.
-     * <p/> Note that changing this setting after a barcode has been drawn will invalidate the
-     * component and may force a refresh.
-     *
-     * @param barHeight The desired height of the barcode bars in pixels
-     */
-    public void setBarHeight(int barHeight) {
-        // There is a minimum bar height that we must enforce
-        if (barHeight > calculateMinimumBarHeight(getResolution())) {
-            this.barHeight = barHeight;
-            invalidateSize();
-        }
-    }
-
-    /**
-     * Sets the desired output resolution for the barcode. This method should
-     * be used in cases where the barcode is either being outputted to a device
+     * Sets the desired output resolution for the barcode. This method should be
+     * used in cases where the barcode is either being outputted to a device
      * other than the screen, or the barcode is being generated on a headless
      * machine (e.g. a rack mounted server) and the screen resolution cannot be
-     * determined. Note that is the barcode is generated in either of these situations
-     * and this method has not been called, the resolution is assumed to be 72 dots
-     * per inch.
-     *
-     * @param resolution The desired output resolution (in dots per inch)
+     * determined. Note that is the barcode is generated in either of these
+     * situations and this method has not been called, the resolution is assumed
+     * to be 72 dots per inch.
+     * 
+     * @param resolution
+     *            The desired output resolution (in dots per inch)
      */
     public void setResolution(int resolution) {
         if (resolution > 0) {
             this.resolution = resolution;
-            int newHeight = calculateMinimumBarHeight(getResolution());
-            if (newHeight > this.barHeight) {
-                this.barHeight = newHeight;
-            }
-            invalidateSize();
         }
+        update();
     }
 
     /**
      * From {@link javax.swing.JComponent JComponent}.
-     *
-     * @return The X co-ordinate of the component's origin
-     */
-    public int getX() {
-        return x;
-    }
-
-    /**
-     * From {@link javax.swing.JComponent JComponent}.
-     *
-     * @return The Y co-ordinate of the component's origin
-     */
-    public int getY() {
-        return y;
-    }
-
-    /**
-     * From {@link javax.swing.JComponent JComponent}.
-     *
-     * @return The width of this component
-     */
-    public int getWidth() {
-        return (int) getActualSize().getWidth();
-    }
-
-    /**
-     * From {@link javax.swing.JComponent JComponent}.
-     *
-     * @return The height of this component
-     */
-    public int getHeight() {
-        return (int) getActualSize().getHeight();
-    }
-
-    /**
-     * From {@link javax.swing.JComponent JComponent}.
-     *
-     * @return The bounds of this component
-     */
-    public Rectangle getBounds() {
-        return getBounds(new Rectangle());
-    }
-
-    /**
-     * From {@link javax.swing.JComponent JComponent}.
-     *
-     * @param rv The rectangle to set the bounds on
-     * @return The updated rv
-     */
-    public Rectangle getBounds(Rectangle rv) {
-        rv.setBounds(getX(), getY(), (int) getActualSize().getWidth() + getX(),
-                (int) getActualSize().getHeight() + getY());
-        return rv;
-    }
-
-    /**
-     * From {@link javax.swing.JComponent JComponent}.
-     *
+     * 
      * @return The preferred size of this component
      */
+    @Override
     public Dimension getPreferredSize() {
         return getActualSize();
     }
 
-    /**
-     * From {@link javax.swing.JComponent JComponent}.
-     *
-     * @return The minimum size of this component
-     */
-    public Dimension getMinimumSize() {
-        return getActualSize();
+    @Override
+    public void setFont(Font font) {
+        if (font == null) {
+            font = EnvironmentFactory.getEnvironment().getDefaultFont();
+        }
+        super.setFont(font);
+        update();
+    }
+
+    @Override
+    public Font getFont() {
+        Font f = super.getFont();
+        if (f == null) {
+            f = EnvironmentFactory.getEnvironment().getDefaultFont();
+        }
+        return f;
     }
 
     /**
-     * From {@link javax.swing.JComponent JComponent}.
-     *
-     * @return The maximum size of this component
-     */
-    public Dimension getMaximumSize() {
-        return getActualSize();
-    }
-
-    /**
-     * From {@link javax.swing.JComponent JComponent}.
-     *
-     * @return The actual size of this component
-     */
-    public Dimension getSize() {
-        return getActualSize();
-    }
-
-    /**
-     * Renders this <code>Barcode</code> at the specified location in
-     * the specified {@link java.awt.Graphics2D Graphics2D} context.
-     * The origin of the layout is placed at x,&nbsp;y.  Rendering may touch
-     * any point within <code>getBounds()</code> of this position.  This
-     * leaves the <code>g2</code> unchanged.
-     *
-     * @param g The graphics context
-     * @param x The horizontal value of the upper left co-ordinate of the bounding box
-     * @param y The vertical value of the upper left co-ordinate of the bounding box
+     * Renders this <code>Barcode</code> at the specified location in the
+     * specified {@link java.awt.Graphics2D Graphics2D} context. The origin of
+     * the layout is placed at x,&nbsp;y. Rendering may touch any point within
+     * <code>getBounds()</code> of this position. This leaves the
+     * <code>g2</code> unchanged.
+     * 
+     * @param g
+     *            The graphics context
+     * @param x
+     *            The horizontal value of the upper left co-ordinate of the
+     *            bounding box
+     * @param y
+     *            The vertical value of the upper left co-ordinate of the
+     *            bounding box
      */
     public void draw(Graphics2D g, int x, int y) throws OutputException {
-        this.x = x;
-        this.y = y;
+        g = (Graphics2D) g.create();
+        g.setFont(getFont());
+        Output output = new GraphicsOutput(g, getFont(), getForeground(),
+                getBackground());
 
-        Output output = new GraphicsOutput(g, font, getForeground(), getBackground());
-        size = draw(output, x, y, barWidth, barHeight);
+        int text = 0;
+        if (isDrawingText()) {
+            FontMetrics fm = g.getFontMetrics();
+            Rectangle2D r2d = fm.getStringBounds(getLabel(), g);
+            text = (int) Math.ceil(r2d.getHeight());
+        }
+        int bh = getHeight() - getInsets().top - getInsets().bottom - text;
+        draw(output, x, y, barWidth, bh);
+    }
+
+    protected String getPureLabel() {
+        return label;
     }
 
     public void output(Output output) throws OutputException {
-        draw(output, 0, 0, barWidth, barHeight);
+        draw(output, 0, 0, barWidth, getPreferredBarHeight());
     }
 
     protected abstract Module[] encodeData();
@@ -338,30 +283,33 @@ public abstract class Barcode extends JComponent
 
     protected abstract Module getPostAmble();
 
-    protected abstract Dimension draw(Output output, int x, int y, int barWidth, int barHeight) throws OutputException;
+    protected abstract Dimension draw(Output output, int x, int y,
+            int barWidth, int barHeight) throws OutputException;
 
     /**
-     * Returns the text that will be displayed underneath the barcode (if requested).
-     *
+     * Returns the text that will be displayed underneath the barcode (if
+     * requested).
+     * 
      * @return The text label for the barcode
      */
     public String getLabel() {
         if (label != null) {
             return label;
-        } else {
-            return beautify(data);
         }
+        return beautify(data);
     }
 
     /**
-     * Sets the human readable text to be displayed underneath the barcode.
-     * If set to null then the text will automaticaly be generated.
-     *
-     * @param label the human readable barcode text
+     * Sets the human readable text to be displayed underneath the barcode. If
+     * set to null then the text will automaticaly be generated.
+     * 
+     * @param label
+     *            the human readable barcode text
      * @see #getLabel()
      */
     public void setLabel(String label) {
         this.label = label;
+        update();
     }
 
     protected int calculateMinimumBarHeight(int resolution) {
@@ -370,17 +318,18 @@ public abstract class Barcode extends JComponent
 
     /**
      * From {@link javax.swing.JComponent JComponent}.
-     *
-     * @param g The graphics to paint the component onto
+     * 
+     * @param g
+     *            The graphics to paint the component onto
      */
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
         Insets insets = getInsets();
         try {
             draw((Graphics2D) g, insets.left, insets.top);
         } catch (OutputException e) {
             // Don't draw anything
         }
+        super.paintComponent(g);
     }
 
     // TODO: Move this to the output
@@ -391,7 +340,8 @@ public abstract class Barcode extends JComponent
         return EnvironmentFactory.getEnvironment().getResolution();
     }
 
-    protected int drawModule(Module module, Output output, int x, int y, int barWidth, int barHeight) throws OutputException {
+    protected int drawModule(Module module, Output output, int x, int y,
+            int barWidth, int barHeight) throws OutputException {
         if (module == null) {
             return 0;
         }
@@ -401,7 +351,8 @@ public abstract class Barcode extends JComponent
     protected String beautify(String s) {
         StringBuffer buf = new StringBuffer();
         StringCharacterIterator iter = new StringCharacterIterator(s);
-        for (char c = iter.first(); c != CharacterIterator.DONE; c = iter.next()) {
+        for (char c = iter.first(); c != CharacterIterator.DONE; c = iter
+                .next()) {
             if (Character.isDefined(c) && !Character.isISOControl(c)) {
                 buf.append(c);
             }
@@ -409,62 +360,54 @@ public abstract class Barcode extends JComponent
         return buf.toString();
     }
 
-    private void invalidateSize() {
-        size = null;
-    }
-
     private Dimension getActualSize() {
-        if (size == null) {
-            size = calculateSize();
-        }
-        return size;
+        return calculateSize();
     }
 
     private Dimension calculateSize() {
         Dimension d = new Dimension();
         if (EnvironmentFactory.getEnvironment() instanceof HeadlessEnvironment) {
             try {
-                d = draw(new SizingOutput(font, getForeground(), getBackground()), 0, 0, barWidth, barHeight);
+                d = draw(new SizingOutput(getFont(), getForeground(),
+                        getBackground()), 0, 0, barWidth,
+                        getPreferredBarHeight());
             } catch (OutputException e) {
             }
         } else {
             try {
                 FontMetrics fontMetrics = null;
-                if (font != null) {
-                    fontMetrics = getFontMetrics(font);
+                if (getFont() != null) {
+                    fontMetrics = getFontMetrics(getFont());
                 }
-                d = draw(new SizingOutput(font, fontMetrics, getForeground(), getBackground()), 0, 0, barWidth, barHeight);
+                d = draw(new SizingOutput(getFont(), fontMetrics,
+                        getForeground(), getBackground()), 0, 0, barWidth,
+                        getPreferredBarHeight());
             } catch (OutputException e) {
+                // Nothing to do
             }
         }
 
         return d;
     }
-    
+
     public int print(Graphics g, PageFormat pageFormat, int pageIndex)
-    				throws PrinterException {
-    	
-    	if (pageIndex >= 1) {
+            throws PrinterException {
+
+        if (pageIndex >= 1) {
             return Printable.NO_SUCH_PAGE;
         }
-    	
-    	try
-    	{
-    		this.draw( (Graphics2D) g, 0, 0);
-            return Printable.PAGE_EXISTS;    	
-    	}
-    	catch (OutputException ex)
-    	{
-    		throw new PrinterException(ex.getMessage()); 
-    	}
-        
-    }
-    
-    public String toString()
-    {
-    	return this.getData();
-    }
-    
 
-    
+        try {
+            this.draw((Graphics2D) g, 0, 0);
+            return Printable.PAGE_EXISTS;
+        } catch (OutputException ex) {
+            throw new PrinterException(ex.getMessage());
+        }
+
+    }
+
+    public String toString() {
+        return this.getData();
+    }
+
 }

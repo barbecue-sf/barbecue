@@ -37,26 +37,27 @@ import java.util.Map;
 
 /**
  * The EAN 13 barcode module definitions.
- *
+ * 
  * @author <a href="mailto:james@metalskin.com">James Jenner</a>
  */
 final class EAN13ModuleFactory extends ModuleFactory {
 
-    protected static final List KEYS_LEFT_ODD = new ArrayList();
-    protected static final List KEYS_LEFT_EVEN = new ArrayList();
+    protected static final List<String>        KEYS_LEFT_ODD       = new ArrayList<String>();
+    protected static final List<String>        KEYS_LEFT_EVEN      = new ArrayList<String>();
 
-    protected static final Map SET_LEFT_ODD = new HashMap();
-    protected static final Map SET_LEFT_EVEN = new HashMap();
+    protected static final Map<String, Module> SET_LEFT_ODD        = new HashMap<String, Module>();
+    protected static final Map<String, Module> SET_LEFT_EVEN       = new HashMap<String, Module>();
 
-    protected static final Module RIGHT_MARGIN = new BlankModule(7);
+    protected static final Module              RIGHT_MARGIN_EAN    = new BlankModule(
+                                                                           7);
 
-    protected static final Map PARITY_TABLE = new HashMap();
+    protected static final Map<String, int[]>  PARITY_TABLE        = new HashMap<String, int[]>();
 
-    protected static final int ODD = 0;
-    protected static final int EVEN = 1;
+    protected static final int                 ODD                 = 0;
+    protected static final int                 EVEN                = 1;
 
-    public static final int LEFT_WIDTH = 7;
-    public static final int GUARD_CHAR_SIZE = 0;
+    public static final int                    LEFT_WIDTH_EAN      = 7;
+    public static final int                    GUARD_CHAR_SIZE_EAN = 0;
 
     static {
         initBaseSet();
@@ -76,96 +77,98 @@ final class EAN13ModuleFactory extends ModuleFactory {
 
         initLeftOddSet();
         initLeftEvenSet();
-        
-        /* map - First number system digit
-         * 0 - second number system digit
-         * 1 -> 5 - manufacturer code characters
+
+        /*
+         * map - First number system digit 0 - second number system digit 1 -> 5
+         * - manufacturer code characters
          */
-        PARITY_TABLE.put("0", new int[]{ODD, ODD, ODD, ODD, ODD, ODD});
-        PARITY_TABLE.put("1", new int[]{ODD, ODD, EVEN, ODD, EVEN, EVEN});
-        PARITY_TABLE.put("2", new int[]{ODD, ODD, EVEN, EVEN, ODD, EVEN});
-        PARITY_TABLE.put("3", new int[]{ODD, ODD, EVEN, EVEN, EVEN, ODD});
-        PARITY_TABLE.put("4", new int[]{ODD, EVEN, ODD, ODD, EVEN, EVEN});
-        PARITY_TABLE.put("5", new int[]{ODD, EVEN, EVEN, ODD, ODD, EVEN});
-        PARITY_TABLE.put("6", new int[]{ODD, EVEN, EVEN, EVEN, ODD, ODD});
-        PARITY_TABLE.put("7", new int[]{ODD, EVEN, ODD, EVEN, ODD, EVEN});
-        PARITY_TABLE.put("8", new int[]{ODD, EVEN, ODD, EVEN, EVEN, ODD});
-        PARITY_TABLE.put("9", new int[]{ODD, EVEN, EVEN, ODD, EVEN, ODD});
+        PARITY_TABLE.put("0", new int[] { ODD, ODD, ODD, ODD, ODD, ODD });
+        PARITY_TABLE.put("1", new int[] { ODD, ODD, EVEN, ODD, EVEN, EVEN });
+        PARITY_TABLE.put("2", new int[] { ODD, ODD, EVEN, EVEN, ODD, EVEN });
+        PARITY_TABLE.put("3", new int[] { ODD, ODD, EVEN, EVEN, EVEN, ODD });
+        PARITY_TABLE.put("4", new int[] { ODD, EVEN, ODD, ODD, EVEN, EVEN });
+        PARITY_TABLE.put("5", new int[] { ODD, EVEN, EVEN, ODD, ODD, EVEN });
+        PARITY_TABLE.put("6", new int[] { ODD, EVEN, EVEN, EVEN, ODD, ODD });
+        PARITY_TABLE.put("7", new int[] { ODD, EVEN, ODD, EVEN, ODD, EVEN });
+        PARITY_TABLE.put("8", new int[] { ODD, EVEN, ODD, EVEN, EVEN, ODD });
+        PARITY_TABLE.put("9", new int[] { ODD, EVEN, EVEN, ODD, EVEN, ODD });
     }
 
     protected static void initLeftOddSet() {
         // left side even parity
         KEYS_LEFT_ODD.add("0");
-        SET_LEFT_ODD.put("0", new Module(new int[]{0, 3, 2, 1, 1})); // 0001101
+        SET_LEFT_ODD.put("0", new Module(new int[] { 0, 3, 2, 1, 1 })); // 0001101
         KEYS_LEFT_ODD.add("1");
-        SET_LEFT_ODD.put("1", new Module(new int[]{0, 2, 2, 2, 1})); // 0011001
+        SET_LEFT_ODD.put("1", new Module(new int[] { 0, 2, 2, 2, 1 })); // 0011001
         KEYS_LEFT_ODD.add("2");
-        SET_LEFT_ODD.put("2", new Module(new int[]{0, 2, 1, 2, 2})); // 0010011
+        SET_LEFT_ODD.put("2", new Module(new int[] { 0, 2, 1, 2, 2 })); // 0010011
         KEYS_LEFT_ODD.add("3");
-        SET_LEFT_ODD.put("3", new Module(new int[]{0, 1, 4, 1, 1})); // 0111101
+        SET_LEFT_ODD.put("3", new Module(new int[] { 0, 1, 4, 1, 1 })); // 0111101
         KEYS_LEFT_ODD.add("4");
-        SET_LEFT_ODD.put("4", new Module(new int[]{0, 1, 1, 3, 2})); // 0100011
+        SET_LEFT_ODD.put("4", new Module(new int[] { 0, 1, 1, 3, 2 })); // 0100011
         KEYS_LEFT_ODD.add("5");
-        SET_LEFT_ODD.put("5", new Module(new int[]{0, 1, 2, 3, 1})); // 0110001
+        SET_LEFT_ODD.put("5", new Module(new int[] { 0, 1, 2, 3, 1 })); // 0110001
         KEYS_LEFT_ODD.add("6");
-        SET_LEFT_ODD.put("6", new Module(new int[]{0, 1, 1, 1, 4})); // 0101111
+        SET_LEFT_ODD.put("6", new Module(new int[] { 0, 1, 1, 1, 4 })); // 0101111
         KEYS_LEFT_ODD.add("7");
-        SET_LEFT_ODD.put("7", new Module(new int[]{0, 1, 3, 1, 2})); // 0111011
+        SET_LEFT_ODD.put("7", new Module(new int[] { 0, 1, 3, 1, 2 })); // 0111011
         KEYS_LEFT_ODD.add("8");
-        SET_LEFT_ODD.put("8", new Module(new int[]{0, 1, 2, 1, 3})); // 0110111
+        SET_LEFT_ODD.put("8", new Module(new int[] { 0, 1, 2, 1, 3 })); // 0110111
         KEYS_LEFT_ODD.add("9");
-        SET_LEFT_ODD.put("9", new Module(new int[]{0, 3, 1, 1, 2})); // 0001011
+        SET_LEFT_ODD.put("9", new Module(new int[] { 0, 3, 1, 1, 2 })); // 0001011
     }
 
     protected static void initLeftEvenSet() {
         // left side odd parity
         KEYS_LEFT_EVEN.add("0");
-        SET_LEFT_EVEN.put("0", new Module(new int[]{0, 1, 1, 2, 3})); // 0100111
+        SET_LEFT_EVEN.put("0", new Module(new int[] { 0, 1, 1, 2, 3 })); // 0100111
         KEYS_LEFT_EVEN.add("1");
-        SET_LEFT_EVEN.put("1", new Module(new int[]{0, 1, 2, 2, 2})); // 0110011
+        SET_LEFT_EVEN.put("1", new Module(new int[] { 0, 1, 2, 2, 2 })); // 0110011
         KEYS_LEFT_EVEN.add("2");
-        SET_LEFT_EVEN.put("2", new Module(new int[]{0, 2, 2, 1, 2})); // 0011011
+        SET_LEFT_EVEN.put("2", new Module(new int[] { 0, 2, 2, 1, 2 })); // 0011011
         KEYS_LEFT_EVEN.add("3");
-        SET_LEFT_EVEN.put("3", new Module(new int[]{0, 1, 1, 4, 1})); // 0100001
+        SET_LEFT_EVEN.put("3", new Module(new int[] { 0, 1, 1, 4, 1 })); // 0100001
         KEYS_LEFT_EVEN.add("4");
-        SET_LEFT_EVEN.put("4", new Module(new int[]{0, 2, 3, 1, 1})); // 0011101
+        SET_LEFT_EVEN.put("4", new Module(new int[] { 0, 2, 3, 1, 1 })); // 0011101
         KEYS_LEFT_EVEN.add("5");
-        SET_LEFT_EVEN.put("5", new Module(new int[]{0, 1, 3, 2, 1})); // 0111001
+        SET_LEFT_EVEN.put("5", new Module(new int[] { 0, 1, 3, 2, 1 })); // 0111001
         KEYS_LEFT_EVEN.add("6");
-        SET_LEFT_EVEN.put("6", new Module(new int[]{0, 4, 1, 1, 1})); // 0000101
+        SET_LEFT_EVEN.put("6", new Module(new int[] { 0, 4, 1, 1, 1 })); // 0000101
         KEYS_LEFT_EVEN.add("7");
-        SET_LEFT_EVEN.put("7", new Module(new int[]{0, 2, 1, 3, 1})); // 0010001
+        SET_LEFT_EVEN.put("7", new Module(new int[] { 0, 2, 1, 3, 1 })); // 0010001
         KEYS_LEFT_EVEN.add("8");
-        SET_LEFT_EVEN.put("8", new Module(new int[]{0, 3, 1, 2, 1})); // 0001001
+        SET_LEFT_EVEN.put("8", new Module(new int[] { 0, 3, 1, 2, 1 })); // 0001001
         KEYS_LEFT_EVEN.add("9");
-        SET_LEFT_EVEN.put("9", new Module(new int[]{0, 2, 1, 1, 3})); // 0010111
+        SET_LEFT_EVEN.put("9", new Module(new int[] { 0, 2, 1, 1, 3 })); // 0010111
     }
 
     /**
      * Returns the module that represents the specified character.
-     *
-     * @param key      The data character to get the encoding module for
-     * @param position The position of the data character, starts at 0
+     * 
+     * @param key
+     *            The data character to get the encoding module for
+     * @param position
+     *            The position of the data character, starts at 0
      * @return The module that encodes the given char
      */
     public static Module getModule(String firstChar, String key, int position) {
         Module module = null;
 
-        /* 
+        /*
          * with the human readble, the left side has 7 chars, but the encoding
-         * only has 6.  this is due to the fact that the first char of the
-         * left side is not encoded.
+         * only has 6. this is due to the fact that the first char of the left
+         * side is not encoded.
          */
-        
-        if (position + 1 > LEFT_WIDTH) {
+
+        if (position + 1 > LEFT_WIDTH_EAN) {
             module = (Module) SET_RIGHT.get(key);
         } else {
-            int[] parityRef = (int[]) PARITY_TABLE.get(firstChar);
+            int[] parityRef = PARITY_TABLE.get(firstChar);
 
             if (parityRef[position - 1] == ODD) {
-                module = (Module) SET_LEFT_ODD.get(key);
+                module = SET_LEFT_ODD.get(key);
             } else {
-                module = (Module) SET_LEFT_EVEN.get(key);
+                module = SET_LEFT_EVEN.get(key);
             }
         }
 
@@ -176,7 +179,7 @@ final class EAN13ModuleFactory extends ModuleFactory {
     /**
      * Indicates whether the given key is represented in the default encoding
      * table that this module factory contains.
-     *
+     * 
      * @return True if the key has a direct module encoding, false if not
      */
     public static boolean hasModule(String key) {
@@ -198,30 +201,30 @@ final class EAN13ModuleFactory extends ModuleFactory {
     /**
      * Returns the encoded module at the given index position. This is used to
      * get the encoded checksum character.
-     *
-     * @param index The index of the module required
+     * 
+     * @param index
+     *            The index of the module required
      * @return The module at the specified index
      */
     public static Module getModuleForIndex(String firstChar, int index) {
-        if (index + 1 > LEFT_WIDTH) {
+        if (index + 1 > LEFT_WIDTH_EAN) {
             return getModule((String) KEYS_RIGHT.get(index), index);
-        } else {
-            int[] parityRef = (int[]) PARITY_TABLE.get(firstChar);
-
-            if (parityRef[index - 1] == ODD) {
-                return getModule((String) KEYS_LEFT_ODD.get(index), index);
-            } else {
-                return getModule((String) KEYS_LEFT_EVEN.get(index), index);
-            }
         }
+        int[] parityRef = PARITY_TABLE.get(firstChar);
+
+        if (parityRef[index - 1] == ODD) {
+            return getModule(KEYS_LEFT_ODD.get(index), index);
+        }
+        return getModule(KEYS_LEFT_EVEN.get(index), index);
     }
 
     /**
      * Indicates whether the given character is valid for this barcode or not.
      * This basically just checks to see whether the key is in the list of
      * encoded characters.
-     *
-     * @param key The key to check for validity
+     * 
+     * @param key
+     *            The key to check for validity
      * @return True if the key is valid, false otherwise
      */
     public static boolean isValid(String key) {

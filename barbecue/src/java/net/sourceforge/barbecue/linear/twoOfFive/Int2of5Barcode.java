@@ -41,73 +41,88 @@ import java.text.StringCharacterIterator;
 /**
  * This is a concrete implementation of the Interleave 2 of 5 barcode
  * 
- * The Interleave 2 of 5 barcode requires an even number of characters. At
- * the same time, a modulo 10 check digit can be used.  The default constructor
- * presumes that if the barcode is of an odd length, then a check digit is 
- * required.  This will automaticaly be generated.
- * If the constructor with the check digit flag is used, the check digit flag is
- * flase and the length of the barcode is odd, then an exception will be thrown.
- *
+ * The Interleave 2 of 5 barcode requires an even number of characters. At the
+ * same time, a modulo 10 check digit can be used. The default constructor
+ * presumes that if the barcode is of an odd length, then a check digit is
+ * required. This will automaticaly be generated. If the constructor with the
+ * check digit flag is used, the check digit flag is flase and the length of the
+ * barcode is odd, then an exception will be thrown.
+ * 
  * @author <a href="mailto:james@metalskin.com">James Jenner</a>
  */
 public class Int2of5Barcode extends Std2of5Barcode {
     /**
-     * Constructs a new Interleave 2 of 5 barcode with the specified data.
-     * No check digit will be added
-     * @param data The data to encode
-     * @throws BarcodeException If the data is invalid
+     * Constructs a new Interleave 2 of 5 barcode with the specified data. No
+     * check digit will be added
+     * 
+     * @param data
+     *            The data to encode
+     * @throws BarcodeException
+     *             If the data is invalid
      */
     public Int2of5Barcode(String data) throws BarcodeException {
         this(data, false);
     }
-    
+
     /**
      * Constructs a new Interleave 2 of 5 barcode with thte specified data.
-     * @param data The data to encode
-     * @param checkDigit if true then a check digit is automaticaly appened to data
-     * @throws BarcodeException If the data is invalid
+     * 
+     * @param data
+     *            The data to encode
+     * @param checkDigit
+     *            if true then a check digit is automaticaly appened to data
+     * @throws BarcodeException
+     *             If the data is invalid
      */
-    public Int2of5Barcode(String data, boolean checkDigit) throws BarcodeException {
+    public Int2of5Barcode(String data, boolean checkDigit)
+            throws BarcodeException {
         super(checkDigit ? data + Modulo10.getMod10CheckDigit(data, 3) : data);
     }
-    
+
     /**
      * Returns the pre-amble for the barcode.
+     * 
      * @return A BlankModule
      */
     protected Module getPreAmble() {
         return Int2of5ModuleFactory.START_CHAR;
     }
-    
+
     /**
      * Returns the post-amble for the barcode.
+     * 
      * @return A BlankModule
      */
     protected Module getPostAmble() {
         return Int2of5ModuleFactory.END_CHAR;
     }
-    
+
     /**
      * Encodes the data of the barcode into bars.
+     * 
      * @return The encoded bar data
      */
     protected Module[] encodeData() {
         List modules = new ArrayList();
-        
-        for(int i = 0; i < data.length() - 1; i += 2) {
-            Module module = Int2of5ModuleFactory.getModule(String.valueOf(data.charAt(i)), String.valueOf(data.charAt(i + 1)));
-            
+
+        String data = getData();
+        for (int i = 0; i < data.length() - 1; i += 2) {
+            Module module = Int2of5ModuleFactory.getModule(String.valueOf(data
+                    .charAt(i)), String.valueOf(data.charAt(i + 1)));
+
             modules.add(module);
         }
-        
-        return (Module[])modules.toArray(new Module[0]);
+
+        return (Module[]) modules.toArray(new Module[0]);
     }
-    
+
     protected void validateData() throws BarcodeException {
-        if(data.length() % 2 != 0) {
-            throw new BarcodeException("The Interleave 2 of 5 encoding requires an even number of data");
+        String data = getData();
+        if (data.length() % 2 != 0) {
+            throw new BarcodeException(
+                    "The Interleave 2 of 5 encoding requires an even number of data");
         }
-        
+
         super.validateData();
     }
 }

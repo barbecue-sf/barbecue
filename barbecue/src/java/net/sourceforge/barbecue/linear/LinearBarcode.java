@@ -37,9 +37,9 @@ public abstract class LinearBarcode extends Barcode {
             currentX += drawModule(postAmble, output, currentX, y, barWidth, barHeight);
         }
 
-        int currentY = this.barHeight + y;
+        int currentY = barHeight + y;
 
-        if (drawingText) {
+        if (isDrawingText()) {
             currentY += drawTextLabel(output, x, currentY, currentX);
         }
 

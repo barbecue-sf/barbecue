@@ -169,7 +169,7 @@ public class BarcodeTest extends TestCase {
 	public void testSettingHeightThatIsToSmallLeavesHeightUnchanged() throws Exception {
 		BarcodeMock barcode = new BarcodeMock("12345");
 		int height = barcode.getHeight();
-		barcode.setBarHeight(0);
+		barcode.setPreferredBarHeight(0);
 		assertEquals(height, barcode.getHeight());
 	}
 
@@ -202,11 +202,7 @@ public class BarcodeTest extends TestCase {
 
 		public BarcodeMock(String data, boolean drawText) throws BarcodeException {
 			super(data);
-			drawingText = drawText;
-		}
-
-		public double getBarWidth() {
-			return barWidth;
+			setDrawingText(drawText);
 		}
 
 		protected double getBarcodeWidth(int resolution) {

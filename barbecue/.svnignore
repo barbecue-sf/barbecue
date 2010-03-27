@@ -14,3 +14,4 @@ bin
 *.eps
 barbecue-src.zip
 barbecue.jar
+build.number

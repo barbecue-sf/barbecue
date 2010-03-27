@@ -126,7 +126,7 @@ public class SVGOutput extends AbstractOutput {
         rectElement.setAttribute("y", getScaledDimension(y));
         rectElement.setAttribute("width", getScaledDimension(width));
         rectElement.setAttribute("height", getScaledDimension(height));
-        rectElement.setAttribute("style", "fill:" + getColorAsCSS(paintWithForegroundColor ? foregroundColour : backgroundColour) + ";");
+        rectElement.setAttribute("style", "fill:" + getColorAsCSS(paintWithForegroundColor ? getForegroundColor() : getBackgroundColor()) + ";");
         root.addContent(rectElement);
         return width;
     }
@@ -150,6 +150,7 @@ public class SVGOutput extends AbstractOutput {
         int size = DEFAULT_SIZE;
         int style = Font.PLAIN;
         
+        Font font = getFont();
         if (font != null) {
             family = font.getFamily();
             size = font.getSize();
@@ -177,7 +178,7 @@ public class SVGOutput extends AbstractOutput {
     }
     
     private String getScaledDimension(int value) {
-        return "" + (value * scalar + units);
+        return "" + (value * getScalar() + units);
     }
     
     private String getColorAsCSS(Color c) {

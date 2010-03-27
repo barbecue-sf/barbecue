@@ -77,7 +77,7 @@ public class SizingOutput extends AbstractOutput {
     }
 
 	public int drawText(String text, LabelLayout labelLayout) throws OutputException {
-		if(font == null || fm == null) {
+		if(getFont() == null || fm == null) {
             return 0;
         }
 		// TODO: This is incorrect

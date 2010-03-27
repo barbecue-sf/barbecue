@@ -134,16 +134,9 @@ public class Code128Barcode extends LinearBarcode {
         return startingMode;
     }
     
-    /**
-     * Returns the text label to be displayed underneath the barcode/
-     * @return The text label for the barcode
-     */
-    public String getLabel() {
-        if(label != null) {
-            return label;
-        } else {
-            return data;
-        }
+    @Override
+    protected String beautify(String s) {
+        return s;
     }
     
     /**
@@ -159,12 +152,12 @@ public class Code128Barcode extends LinearBarcode {
         //		C = number of data characters, code characters and shift characters
         //		(do not include start, stop or checksum. They are automatically added in.)
         //		X = X-dimension
-        double barWidthMM = convertToMillimetres(barWidth, resolution);
+        double barWidthMM = convertToMillimetres(getBarWidth(), resolution);
         double multiplier = 11;
         if (startingMode == C) {
             multiplier = 5.5;
         }
-        return (multiplier * data.length() + 35) * barWidthMM;
+        return (multiplier * getData().length() + 35) * barWidthMM;
     }
     
     /**
@@ -190,10 +183,12 @@ public class Code128Barcode extends LinearBarcode {
         // We are calculating the check digit as we encode - this will ensure that it is
         // calculated correctly, even with code changes to char set C
         sum = new Accumulator(startIndex);
-        List modules = new ArrayList();
+        List<Module> modules = new ArrayList<Module>();
         buf = new CharBuffer(BUF_SIZES[mode]);
         index = new Accumulator(1);
         padDataToEvenLength();
+        
+        String data = getData();
         
         for (int i = 0; i < data.length(); i++) {
             char c = data.charAt(i);
@@ -226,7 +221,7 @@ public class Code128Barcode extends LinearBarcode {
         
         checkDigit = ModuleFactory.getModuleForIndex(sum.getValue() % 103, mode);
         mode = startingMode;
-        return (Module[]) modules.toArray(new Module[0]);
+        return modules.toArray(new Module[0]);
     }
     
     private boolean isShiftOrCode(char c) {
@@ -257,7 +252,7 @@ public class Code128Barcode extends LinearBarcode {
      */
     protected Module getPreAmble() {
         CompositeModule module = new CompositeModule();
-        if(drawingQuietSection) {
+        if(isDrawingQuietSection()) {
             module.add(QUIET_SECTION);
         }
         module.add(START[mode]);
@@ -272,7 +267,7 @@ public class Code128Barcode extends LinearBarcode {
     protected Module getPostAmble() {
         CompositeModule module = new CompositeModule();
         module.add(STOP);
-        if(drawingQuietSection) {
+        if(isDrawingQuietSection()) {
             module.add(QUIET_SECTION);
         }
         return module;
@@ -309,9 +304,11 @@ public class Code128Barcode extends LinearBarcode {
      */
     private void padDataToEvenLength() {
         // Only for Code C
+        String data = getData();
         if (startingMode == C && data.length() % 2 != 0 && !containsShiftOrChange(data)) {
             data = '0' + data;
         }
+        setData(data);
     }
     
     private boolean containsShiftOrChange(String data) {
