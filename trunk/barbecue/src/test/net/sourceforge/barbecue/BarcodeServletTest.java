@@ -50,10 +50,11 @@ import java.util.Locale;
 import java.util.Map;
 
 public class BarcodeServletTest extends BarcodeTestCase {
-    private BarcodeServletMock servlet;
+
+    private BarcodeServletMock      servlet;
     private HttpServletResponseMock res;
-    private HttpServletRequestMock req;
-    private Map params;
+    private HttpServletRequestMock  req;
+    private Map                     params;
 
     protected void setUp() throws Exception {
         super.setUp();
@@ -93,7 +94,8 @@ public class BarcodeServletTest extends BarcodeTestCase {
         assertEquals("barbecue", servlet.getServletName());
     }
 
-    public void testSettingResolutionChangesDefaultResolution() throws Exception {
+    public void testSettingResolutionChangesDefaultResolution()
+            throws Exception {
         params.put("height", "200");
         params.put("width", "3");
         params.put("resolution", "72");
@@ -103,13 +105,15 @@ public class BarcodeServletTest extends BarcodeTestCase {
         assertEquals(72, barcode.getResolution());
     }
 
-    public void testGettingBarcodeWithNoTypeCreatesCode128Optimal() throws Exception {
+    public void testGettingBarcodeWithNoTypeCreatesCode128Optimal()
+            throws Exception {
         req.setParameters(params);
         servlet.doGet(req, res);
         assertTrue(servlet.getBarcode() instanceof Code128Barcode);
     }
 
-    public void testSettingTypeToUCC128WithNoAppIdThrowsException() throws Exception {
+    public void testSettingTypeToUCC128WithNoAppIdThrowsException()
+            throws Exception {
         params.put("type", "UCC128");
         req.setParameters(params);
         try {
@@ -203,7 +207,8 @@ public class BarcodeServletTest extends BarcodeTestCase {
         assertFalse(barcode.isDrawingText());
     }
 
-    public void testDrawTextParameterIsNotIgnoredIfNotHeadless() throws Exception {
+    public void testDrawTextParameterIsNotIgnoredIfNotHeadless()
+            throws Exception {
         params.put("type", "Code128");
         params.put("headless", "false");
         params.put("drawText", "true");
@@ -213,7 +218,8 @@ public class BarcodeServletTest extends BarcodeTestCase {
         assertTrue(barcode.isDrawingText());
     }
 
-    private void assertCanGenerateBarcodeInServlet(String type) throws ServletException {
+    private void assertCanGenerateBarcodeInServlet(String type)
+            throws ServletException {
         params.put("type", type);
         req.setParameters(params);
         servlet.doGet(req, res);
@@ -221,10 +227,11 @@ public class BarcodeServletTest extends BarcodeTestCase {
         assertTrue(res.hasOutput());
     }
 
-    private class BarcodeServletMock extends BarcodeServlet {
+    class BarcodeServletMock extends BarcodeServlet {
         Barcode barcode;
 
-        protected Barcode getBarcode(String type, String data, String appId, boolean checkSum) throws ServletException {
+        protected Barcode getBarcode(String type, String data, String appId,
+                boolean checkSum) throws ServletException {
             barcode = super.getBarcode(type, data, appId, checkSum);
             return barcode;
         }
@@ -234,8 +241,8 @@ public class BarcodeServletTest extends BarcodeTestCase {
         }
     }
 
-    private class HttpServletResponseMock implements HttpServletResponse {
-        private String contentType;
+    class HttpServletResponseMock implements HttpServletResponse {
+        private String                  contentType;
         private ServletOutputStreamMock outputStream;
 
         public HttpServletResponseMock() {
@@ -353,7 +360,7 @@ public class BarcodeServletTest extends BarcodeTestCase {
         }
     }
 
-    private class ServletOutputStreamMock extends ServletOutputStream {
+    class ServletOutputStreamMock extends ServletOutputStream {
         boolean hasOutput = false;
 
         public void write(int b) throws IOException {
@@ -361,7 +368,7 @@ public class BarcodeServletTest extends BarcodeTestCase {
         }
     }
 
-    private class HttpServletRequestMock implements HttpServletRequest {
+    class HttpServletRequestMock implements HttpServletRequest {
         private Map params;
 
         public String getAuthType() {
@@ -558,7 +565,8 @@ public class BarcodeServletTest extends BarcodeTestCase {
         public void setAttribute(String s, Object o) {
         }
 
-        public void setCharacterEncoding(String s) throws UnsupportedEncodingException {
+        public void setCharacterEncoding(String s)
+                throws UnsupportedEncodingException {
         }
 
         public void setParameters(Map params) {

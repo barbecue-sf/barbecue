@@ -5,12 +5,12 @@ All rights reserved.
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-    * Redistributions of source code must retain the above copyright notice, this list of
+ * Redistributions of source code must retain the above copyright notice, this list of
       conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above copyright notice, this list of
+ * Redistributions in binary form must reproduce the above copyright notice, this list of
       conditions and the following disclaimer in the documentation and/or other materials
       provided with the distribution.
-    * Neither the name of the International Barcode Consortium nor the names of any contributors may be used to endorse
+ * Neither the name of the International Barcode Consortium nor the names of any contributors may be used to endorse
       or promote products derived from this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
@@ -22,7 +22,7 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSE
 THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
-***********************************************************************************************************************/
+ ***********************************************************************************************************************/
 
 package net.sourceforge.barbecue.twod.pdf417;
 
@@ -31,306 +31,319 @@ import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.OutputException;
 
 /**
- * Specific module implementation that draws an entire PDF417 barcode
- * as one barbecue module. This is not an ideal implementation, but was
- * the best way of integrating the PDF417 code short of re-writing it.
- *
- * <p/>Contributed by Alex Ferrer <alex@ftconsult.com>
- *
+ * Specific module implementation that draws an entire PDF417 barcode as one
+ * barbecue module. This is not an ideal implementation, but was the best way of
+ * integrating the PDF417 code short of re-writing it.
+ * 
+ * <p/>
+ * Contributed by Alex Ferrer <alex@ftconsult.com>
+ * 
  * @author Alex Ferrer
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
- *
+ * 
  * @todo Do we really want to fix the DATACOLS to 12?
  */
 public class PDF417Module extends Module {
-	private static final int DATACOLS = 12;
 
-	private final String data;
-	private int[] out;
-	private int outlen;
-	private int outrows;
-	private int col = 0;
-	private int xp;
-	private int yp;
-	private int startX;
-	private int wsize = 0;
-	private int barWidth;
+    private static final int DATACOLS = 12;
 
-	/**
-	 * Constructs the PDF417 barcode with the specified data.
-	 * @param data The data to encode
-	 */
-	public PDF417Module(String data) {
-		super(new int[0]);
-		this.data = data;
-	}
+    private final String     data;
+    private int[]            out;
+    private int              outlen;
+    private int              outrows;
+    private int              col      = 0;
+    private int              xp;
+    private int              yp;
+    private int              startX;
+    private int              wsize    = 0;
+    private int              barWidth;
 
-	/**
-	 * Returns the barcode width;
-	 * @return The barcode width
-	 */
-	private int getBarcodeWidth() {
-		return wsize - startX;
-	}
+    /**
+     * Constructs the PDF417 barcode with the specified data.
+     * 
+     * @param data
+     *            The data to encode
+     */
+    public PDF417Module(String data) {
+        super(new int[0]);
+        this.data = data;
+    }
 
-	/**
-	 * Returns the barcode height.
-	 * @return The barcode height
-	 */
-	int getBarcodeHeight() {
-		return yp;
-	}
+    /**
+     * Returns the barcode width;
+     * 
+     * @return The barcode width
+     */
+    private int getBarcodeWidth() {
+        return wsize - startX;
+    }
 
-	/**
-	 * Draw the barcode to the specified outputter, at the specified origin.
-	 * @param outputter The outputter
-	 * @param x The X component of the origin
-	 * @param y The Y component of the origin
-	 * @param barWidth
-	 * @param barHeight
-	 * @return The total width drawn
-	 */
-	protected int draw(Output outputter, int x, int y, int barWidth, int barHeight) throws OutputException {
-		this.xp = (int) x;
-		this.startX = (int) x;
-		this.yp = (int) y;
-		this.barWidth = (int) barWidth;
-		createCodewords(data.toCharArray(), data.length());
-		createBits(out, outlen, outrows);
-		encode(out, outrows, outputter);
+    /**
+     * Returns the barcode height.
+     * 
+     * @return The barcode height
+     */
+    int getBarcodeHeight() {
+        return yp;
+    }
 
-		return getBarcodeWidth();
-	}
+    /**
+     * Draw the barcode to the specified outputter, at the specified origin.
+     * 
+     * @param outputter
+     *            The outputter
+     * @param x
+     *            The X component of the origin
+     * @param y
+     *            The Y component of the origin
+     * @param barWidth
+     * @param barHeight
+     * @return The total width drawn
+     */
+    protected int draw(Output outputter, int x, int y, int barWidth,
+            int barHeight) throws OutputException {
+        this.xp = (int) x;
+        this.startX = (int) x;
+        this.yp = (int) y;
+        this.barWidth = (int) barWidth;
+        createCodewords(data.toCharArray(), data.length());
+        createBits(out, outlen, outrows);
+        encode(out, outrows, outputter);
 
-	/**
-	 * I have no idea what this does.
-	 * @param data The barcode data
-	 * @param length The length of the data
-	 * @param ecLength The length of the EC (2)
-	 */
-	private void generateEC(int[] data, int length, int ecLength) {
-		int b0 = 0;
-		int b1 = 0;
-		int g0 = 27;
-		int g1 = 917;  /* (x-3)(x-9) = x^2+917x+27 mod 929 */
+        return getBarcodeWidth();
+    }
 
-		/* Initialize */
-		data[length] = 0;
-		data[length + 1] = 0;
+    /**
+     * I have no idea what this does.
+     * 
+     * @param data
+     *            The barcode data
+     * @param length
+     *            The length of the data
+     * @param ecLength
+     *            The length of the EC (2)
+     */
+    private void generateEC(int[] data, int length, int ecLength) {
+        int b0 = 0;
+        int b1 = 0;
+        int g0 = 27;
+        int g1 = 917; /* (x-3)(x-9) = x^2+917x+27 mod 929 */
 
-		/* We only know ecLength == 2 for now */
-		if (ecLength != 2) {
-			return;
-		}
+        /* Initialize */
+        data[length] = 0;
+        data[length + 1] = 0;
 
-		/* Load up with data */
-		for (int i = 0; i < length; ++i) {
-			int wrap = (b1 + data[i]) % 929;
+        /* We only know ecLength == 2 for now */
+        if (ecLength != 2) {
+            return;
+        }
 
-			if (wrap != 0) {
-				wrap = 929 - wrap;
-			}
+        /* Load up with data */
+        for (int i = 0; i < length; ++i) {
+            int wrap = (b1 + data[i]) % 929;
 
-			b1 = (b0 + g1 * wrap) % 929;
-			b0 = (0 + g0 * wrap) % 929;
-		}
+            if (wrap != 0) {
+                wrap = 929 - wrap;
+            }
 
-		/* Read off the info */
-		if (b0 != 0) {
-			b0 = 929 - b0;
-		}
+            b1 = (b0 + g1 * wrap) % 929;
+            b0 = (0 + g0 * wrap) % 929;
+        }
 
-		if (b1 != 0) {
-			b1 = 929 - b1;
-		}
+        /* Read off the info */
+        if (b0 != 0) {
+            b0 = 929 - b0;
+        }
 
-		data[length] = b1;
-		data[length + 1] = b0;
-	}
+        if (b1 != 0) {
+            b1 = 929 - b1;
+        }
 
-	private void outbit(int bit, Output params) throws OutputException {
-		params.drawBar(xp, yp, 1, 1, bit == 1);
+        data[length] = b1;
+        data[length + 1] = b0;
+    }
 
-		xp = xp + barWidth;
-		if (col++ == wsize - 1) {
-			col = 0;
-			yp = yp + 1;
-			xp = startX;
-		}
-	}
+    private void outbit(int bit, Output params) throws OutputException {
+        params.drawBar(xp, yp, 1, 1, bit == 1);
 
-	private void createCodewords(char[] data, int len) {
-		int ecLength = 2; /* Number of codewords for error correction */
-		/* Check args */
+        xp = xp + barWidth;
+        if (col++ == wsize - 1) {
+            col = 0;
+            yp = yp + 1;
+            xp = startX;
+        }
+    }
 
-		if (DATACOLS < 1 || DATACOLS > 30) {
-			return;
-		}
-		/* Calculate the length of the eventual sequence */
-		outlen = 2 + (len / 6) * 5 + (len % 6) + ecLength;
+    private void createCodewords(char[] data, int len) {
+        int ecLength = 2; /* Number of codewords for error correction */
 
-		/* Pad to an integer number of rows, at least 3 */
-		outrows = outlen / DATACOLS;
-		if ((outlen % DATACOLS) != 0) {
-			++outrows;
-		}
-		if (outrows < 3) {
-			outrows = 3;
-		}
-		if (outrows > 90) {
-			return;
-		}
-		outlen = outrows * DATACOLS;
-		/* We don't do multipart symbols (Macro PDF 417) */
-		if (outlen > 928) {
-			return;
-		}
+        /* Calculate the length of the eventual sequence */
+        outlen = 2 + (len / 6) * 5 + (len % 6) + ecLength;
 
-		/* The first two codewords are the length and the BC mode latch
-		   The mode latch is 924 if len is a multiple of 6, 901 otherwise */
-		out = new int[outlen];              // dimension the array
-		out[0] = 2 + (len / 6) * 5 + (len % 6);   // 1st value s size of sequence
-		if (len % 6 != 0) {
-			out[1] = 901;  					// if len not a multiple of 6
-		} else {
-			out[1] = 924;                    // if len *is* a multiple of 6
-		}
+        /* Pad to an integer number of rows, at least 3 */
+        outrows = outlen / DATACOLS;
+        if ((outlen % DATACOLS) != 0) {
+            ++outrows;
+        }
+        if (outrows < 3) {
+            outrows = 3;
+        }
+        if (outrows > 90) {
+            return;
+        }
+        outlen = outrows * DATACOLS;
+        /* We don't do multipart symbols (Macro PDF 417) */
+        if (outlen > 928) {
+            return;
+        }
 
-		/* Map blocks of 6 bytes to block of 5 codewords */
-		int inp = 0;
-		int outp = 2;
-		while (inp + 5 < len) {
-			/* Treat the 6 bytes as a big-endian base 256 number */
-			long codeval = 0;
-			for (int i = 0; i < 6; ++i) {
-				codeval <<= 8;
-				codeval += data[inp++];
-			}
-			/* Convert the number to base 900 */
-			for (int i = 0; i < 5; i++) {
-				out[outp + 4 - i] = new Long(codeval % 900).intValue();
-				codeval /= 900;
-			}
-			outp += 5;
-		}
+        /*
+         * The first two codewords are the length and the BC mode latch The mode
+         * latch is 924 if len is a multiple of 6, 901 otherwise
+         */
+        out = new int[outlen]; // dimension the array
+        out[0] = 2 + (len / 6) * 5 + (len % 6); // 1st value s size of sequence
+        if (len % 6 != 0) {
+            out[1] = 901; // if len not a multiple of 6
+        } else {
+            out[1] = 924; // if len *is* a multiple of 6
+        }
 
-		/* Finish up the data */
-		while (inp < len) {
-			out[outp++] = data[inp++];
-		}
+        /* Map blocks of 6 bytes to block of 5 codewords */
+        int inp = 0;
+        int outp = 2;
+        while (inp + 5 < len) {
+            /* Treat the 6 bytes as a big-endian base 256 number */
+            long codeval = 0;
+            for (int i = 0; i < 6; ++i) {
+                codeval <<= 8;
+                codeval += data[inp++];
+            }
+            /* Convert the number to base 900 */
+            for (int i = 0; i < 5; i++) {
+                out[outp + 4 - i] = new Long(codeval % 900).intValue();
+                codeval /= 900;
+            }
+            outp += 5;
+        }
 
-		/* Do padding */
-		while (outp < outlen - ecLength) {
-			out[outp++] = 900;
-		}
+        /* Finish up the data */
+        while (inp < len) {
+            out[outp++] = data[inp++];
+        }
 
-		generateEC(out, outp, ecLength);
-	}
+        /* Do padding */
+        while (outp < outlen - ecLength) {
+            out[outp++] = 900;
+        }
 
-	private void createBits(int[] codes, int codelen, int datarows) {
-		int row, inp, outp;
-		if (DATACOLS < 1 || DATACOLS > 30
-		 				 || datarows < 3 || datarows > 90
-		 				 || codelen != DATACOLS * datarows) {
-			return;
-		}
-		/* Each row has start, left, data, right, stop */
-		int outlen = datarows * (DATACOLS + 4);
-		int[] out = new int[outlen];
-		outp = 0;
-		inp = 0;
+        generateEC(out, outp, ecLength);
+    }
 
-		for (row = 0; row < datarows; ++row) {
-			/* Do each row */
-			int v = DATACOLS - 1;
-			int w = row % 3;
-			int x = row / 3;
-			int y = datarows / 3;
-			int z = 0 * 3 + datarows % 3;  /* The 0 is the error correction level */
-			out[outp++] = PDF417Data.PDF417_START;
-			switch (w) {
-				case 0:
-					out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + y];
-					break;
-				case 1:
-					out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + z];
-					break;
-				case 2:
-					out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + v];
-					break;
-			}
-			for (int i = 0; i < DATACOLS; ++i) {
-				out[outp++] = PDF417Data.PDF417_BITS[w][codes[inp++]];
-			}
-			switch (w) {
-				case 0:
-					out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + v];
-					break;
-				case 1:
-					out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + y];
-					break;
-				case 2:
-					out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + z];
-					break;
-			}
-			out[outp++] = PDF417Data.PDF417_STOP;
-		}
-		this.out = out;
-		this.outlen = outlen;
-	}
+    private void createBits(int[] codes, int codelen, int datarows) {
+        int row, inp, outp;
+        if (DATACOLS < 1 || DATACOLS > 30 || datarows < 3 || datarows > 90
+                || codelen != DATACOLS * datarows) {
+            return;
+        }
+        /* Each row has start, left, data, right, stop */
+        int outlen = datarows * (DATACOLS + 4);
+        int[] out = new int[outlen];
+        outp = 0;
+        inp = 0;
 
-	private void encode(int[] data, int datarows, Output params) throws OutputException {
-		int bitpattern;
-		int row_height = 7;
-		int npix = 2;
-		wsize = ((DATACOLS + 4) * 17 + barWidth + 4) * npix;
+        for (row = 0; row < datarows; ++row) {
+            /* Do each row */
+            int v = DATACOLS - 1;
+            int w = row % 3;
+            int x = row / 3;
+            int y = datarows / 3;
+            int z = 0 * 3 + datarows % 3; /* The 0 is the error correction level */
+            out[outp++] = PDF417Data.PDF417_START;
+            switch (w) {
+            case 0:
+                out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + y];
+                break;
+            case 1:
+                out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + z];
+                break;
+            case 2:
+                out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + v];
+                break;
+            }
+            for (int i = 0; i < DATACOLS; ++i) {
+                out[outp++] = PDF417Data.PDF417_BITS[w][codes[inp++]];
+            }
+            switch (w) {
+            case 0:
+                out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + v];
+                break;
+            case 1:
+                out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + y];
+                break;
+            case 2:
+                out[outp++] = PDF417Data.PDF417_BITS[w][30 * x + z];
+                break;
+            }
+            out[outp++] = PDF417Data.PDF417_STOP;
+        }
+        this.out = out;
+        this.outlen = outlen;
+    }
 
-		/* Top quiet zone */
-		for (int i = 0; i < 2 * npix; i++) {
-			for (int j = 0; j < ((DATACOLS + 4) * 17 + 1 + 4) * npix; j++) {
-				outbit(0, params);
-			}
-		}
+    private void encode(int[] data, int datarows, Output params)
+            throws OutputException {
+        int bitpattern;
+        int row_height = 7;
+        int npix = 2;
+        wsize = ((DATACOLS + 4) * 17 + barWidth + 4) * npix;
 
-		for (int i = 0; i < datarows; i++) {
-			for (int k = 0; k < row_height; k++) {
+        /* Top quiet zone */
+        for (int i = 0; i < 2 * npix; i++) {
+            for (int j = 0; j < ((DATACOLS + 4) * 17 + 1 + 4) * npix; j++) {
+                outbit(0, params);
+            }
+        }
 
-				/* Left quiet zone */
-				for (int pixn = 0; pixn < 2 * npix; pixn++) {
-					outbit(0, params);
-				}
+        for (int i = 0; i < datarows; i++) {
+            for (int k = 0; k < row_height; k++) {
 
-				for (int j = 0; j < (DATACOLS + 4); j++) {
-					bitpattern = data[(DATACOLS + 4) * i + j];
+                /* Left quiet zone */
+                for (int pixn = 0; pixn < 2 * npix; pixn++) {
+                    outbit(0, params);
+                }
 
-					for (int bitm = 16; bitm >= 0; bitm--) {
-						for (int pixn = 0; pixn < npix; pixn++) {
+                for (int j = 0; j < (DATACOLS + 4); j++) {
+                    bitpattern = data[(DATACOLS + 4) * i + j];
 
-							if ((bitpattern & (1 << bitm)) != 0) {
-								outbit(1, params);
-							} else {
-								outbit(0, params);
-							}
-						}
-					}
-				}
+                    for (int bitm = 16; bitm >= 0; bitm--) {
+                        for (int pixn = 0; pixn < npix; pixn++) {
 
-				for (int pixn = 0; pixn < npix; pixn++) {
-					outbit(1, params);
-				}
+                            if ((bitpattern & (1 << bitm)) != 0) {
+                                outbit(1, params);
+                            } else {
+                                outbit(0, params);
+                            }
+                        }
+                    }
+                }
 
-				/* Right quiet zone */
-				for (int pixn = 0; pixn < 2 * npix; pixn++) {
-					outbit(0, params);
-				}
-			}
-		}
+                for (int pixn = 0; pixn < npix; pixn++) {
+                    outbit(1, params);
+                }
 
-		/* Bottom quiet zone */
-		for (int i = 0; i < 2 * npix; ++i) {
-			for (int j = 0; j < ((DATACOLS + 4) * 17 + 1 + 4) * npix; ++j) {
-				outbit(0, params);
-			}
-		}
-	}
+                /* Right quiet zone */
+                for (int pixn = 0; pixn < 2 * npix; pixn++) {
+                    outbit(0, params);
+                }
+            }
+        }
+
+        /* Bottom quiet zone */
+        for (int i = 0; i < 2 * npix; ++i) {
+            for (int j = 0; j < ((DATACOLS + 4) * 17 + 1 + 4) * npix; ++j) {
+                outbit(0, params);
+            }
+        }
+    }
 }

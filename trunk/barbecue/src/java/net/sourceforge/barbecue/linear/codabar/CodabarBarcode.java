@@ -38,58 +38,65 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
 /**
- * This is a concrete implementation of the Codabar barcode, AKA USD-4,
- * Monarch, NW-7 and 2of7. This implementation imposes no restrictions
- * on your choice of start and stop characters, so you will need to check
- * that you are using chars acceptable to your barcode scanner. This
- * implementation does support the traditional a, b, c, d, e, t, n and * start/stop chars.
- * Omitting the start/stop chars from your data will cause the barcode to use
- * the default start/stops chars, A and C, respectively.
- * <br/>
+ * This is a concrete implementation of the Codabar barcode, AKA USD-4, Monarch,
+ * NW-7 and 2of7. This implementation imposes no restrictions on your choice of
+ * start and stop characters, so you will need to check that you are using chars
+ * acceptable to your barcode scanner. This implementation does support the
+ * traditional a, b, c, d, e, t, n and * start/stop chars. Omitting the
+ * start/stop chars from your data will cause the barcode to use the default
+ * start/stops chars, A and C, respectively. <br/>
  * This implementation provides no support for check digits (as they are not
  * included in the Codabar specification). However, many uses of Codabars
  * mandate the use of a check digit, and the algorithms used vary from
  * application to application. The most common algorithm is Mod-16. If you wish
  * to implement a check digit in your Codabar barcode, you must calculate it
- * yourself and insert it into the data to be encoded before the Stop char (or at
- * the end of the data if you are letting barbecue insert start and stop chars for
- * you).
- *
+ * yourself and insert it into the data to be encoded before the Stop char (or
+ * at the end of the data if you are letting barbecue insert start and stop
+ * chars for you).
+ * 
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
 public class CodabarBarcode extends LinearBarcode {
     /** The default codabar start character */
     public static final String DEFAULT_START = "A";
     /** The default codabar stop character */
-    public static final String DEFAULT_STOP = "C";
-    
-    private String label;
-    
+    public static final String DEFAULT_STOP  = "C";
+
+    private String             label;
+
     /**
      * Constructs a new Codabar barcode with thte specified data.
-     * @param data The data to encode
-     * @throws BarcodeException If the data is invalid
+     * 
+     * @param data
+     *            The data to encode
+     * @throws BarcodeException
+     *             If the data is invalid
      */
     public CodabarBarcode(String data) throws BarcodeException {
         super(data);
         this.label = data;
         validateData();
     }
-    
+
     /**
      * Returns the text label to be displayed underneath the barcode.
+     * 
      * @return The barcode label
      */
+    @Override
     public String getLabel() {
         return label;
     }
-    
+
     /**
      * Encodes the data of the barcode into bars.
+     * 
      * @return The encoded bar data
      */
+    @Override
     protected Module[] encodeData() {
-        List modules = new ArrayList();
+        String data = getData();
+        List<Module> modules = new ArrayList<Module>();
         for (int i = 0; i < data.length(); i++) {
             if (i > 0) {
                 modules.add(new SeparatorModule(1));
@@ -98,62 +105,68 @@ public class CodabarBarcode extends LinearBarcode {
             Module module = ModuleFactory.getModule(String.valueOf(c));
             modules.add(module);
         }
-        return (Module[]) modules.toArray(new Module[0]);
+        return modules.toArray(new Module[0]);
     }
-    
+
     /**
      * Calculates the check sum digit for the barcode.
+     * 
      * @return Null - Codabar has no checksum
      */
+    @Override
     protected Module calculateChecksum() {
         return null; // No checksum - return null
     }
-    
+
     /**
      * Returns the pre-amble for the barcode.
+     * 
      * @return A BlankModule
      */
+    @Override
     protected Module getPreAmble() {
-        if(drawingQuietSection) {
+        if (isDrawingQuietSection()) {
             return new BlankModule(0);
-        } else {
-            return null;
         }
+        return null;
     }
-    
+
     /**
      * Returns the post-amble for the barcode.
+     * 
      * @return A BlankModule
      */
+    @Override
     protected Module getPostAmble() {
-        if(drawingQuietSection) {
+        if (isDrawingQuietSection()) {
             return new BlankModule(0);
-        } else {
-            return null;
         }
+        return null;
     }
-    
+
     private void validateData() throws BarcodeException {
         replaceTraditionalStartStopWithModern();
         addDefaultStartStopIfRequired();
         int index = 0;
         StringBuffer buf = new StringBuffer();
-        StringCharacterIterator iter = new StringCharacterIterator(data);
-        for (char c = iter.first(); c != CharacterIterator.DONE; c = iter.next()) {
+        StringCharacterIterator iter = new StringCharacterIterator(getData());
+        for (char c = iter.first(); c != CharacterIterator.DONE; c = iter
+                .next()) {
             if (!Character.isWhitespace(c)) {
                 if (!ModuleFactory.isValid(String.valueOf(c))) {
                     throw new BarcodeException(c
-                    + " is not a valid character for Codabar encoding");
+                            + " is not a valid character for Codabar encoding");
                 }
                 checkStartStop(c, index);
                 buf.append(c);
             }
             index += 1;
         }
-        data = buf.toString();
+        setData(buf.toString());
     }
-    
+
     private void addDefaultStartStopIfRequired() {
+        String data = getData();
         StringBuffer newData = new StringBuffer();
         if (!Character.isLetter(data.charAt(0))) {
             newData.append(DEFAULT_START);
@@ -162,10 +175,11 @@ public class CodabarBarcode extends LinearBarcode {
         if (!Character.isLetter(data.charAt(data.length() - 1))) {
             newData.append(DEFAULT_STOP);
         }
-        data = newData.toString();
+        setData(newData.toString());
     }
-    
+
     private void replaceTraditionalStartStopWithModern() {
+        String data = getData();
         data = data.replace('a', 'A');
         data = data.replace('t', 'A');
         data = data.replace('b', 'B');
@@ -174,12 +188,15 @@ public class CodabarBarcode extends LinearBarcode {
         data = data.replace('*', 'C');
         data = data.replace('d', 'D');
         data = data.replace('e', 'D');
+        setData(data);
     }
-    
+
     private void checkStartStop(char c, int index) throws BarcodeException {
-        if (Character.isLetter(c) && index > 0 && index < data.length() - 1) {
-            throw new BarcodeException(c
-            + " is only allowed as the first and last characters for Codabar barcodes");
+        if (Character.isLetter(c) && index > 0
+                && index < getData().length() - 1) {
+            throw new BarcodeException(
+                    c
+                            + " is only allowed as the first and last characters for Codabar barcodes");
         }
     }
 }

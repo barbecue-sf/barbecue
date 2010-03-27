@@ -97,7 +97,8 @@ public class Code39Barcode extends LinearBarcode {
      * @return An array of modules that represent the data as a barcode
      */
     protected Module[] encodeData() {
-        List modules = new ArrayList();
+        String data = getData();
+        List<Module> modules = new ArrayList<Module>();
         for (int i = 0; i < data.length(); i++) {
             char c = data.charAt(i);
             modules.add(new SeparatorModule(1));
@@ -105,7 +106,7 @@ public class Code39Barcode extends LinearBarcode {
             modules.add(module);
         }
         modules.add(new SeparatorModule(1));
-        return (Module[]) modules.toArray(new Module[0]);
+        return modules.toArray(new Module[0]);
     }
 
     /**
@@ -115,7 +116,7 @@ public class Code39Barcode extends LinearBarcode {
      */
     protected Module calculateChecksum() {
         if (requiresChecksum) {
-            int checkIndex = calculateMod43(data);
+            int checkIndex = calculateMod43(getData());
             CompositeModule compositeModule = new CompositeModule();
             compositeModule.add(ModuleFactory.getModuleForIndex(checkIndex));
             compositeModule.add(new SeparatorModule(1));

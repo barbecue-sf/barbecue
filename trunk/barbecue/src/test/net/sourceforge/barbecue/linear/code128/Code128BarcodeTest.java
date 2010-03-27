@@ -314,7 +314,7 @@ public class Code128BarcodeTest extends BarcodeTestCase {
 	public void testDrawPaintsBars() throws Exception {
 		Code128Barcode barcode = new DataOnlyCode128("1");
 		int barHeight = 44;
-		barcode.setBarHeight(barHeight);
+		barcode.setPreferredBarHeight(barHeight);
 		barcode.setBarWidth(2);
 		barcode.setDrawingText(false);
 		GraphicsMock g = new GraphicsMock();

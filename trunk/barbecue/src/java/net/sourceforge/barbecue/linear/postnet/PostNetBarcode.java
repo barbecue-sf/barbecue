@@ -1,6 +1,6 @@
 /*
  * Created on Aug 31, 2004
-*/
+ */
 package net.sourceforge.barbecue.linear.postnet;
 
 import net.sourceforge.barbecue.BarcodeException;
@@ -21,17 +21,22 @@ public class PostNetBarcode extends LinearBarcode {
         super(zipcode);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see net.sourceforge.barbecue.Barcode#calculateChecksum()
      */
     protected Module calculateChecksum() {
         return null;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see net.sourceforge.barbecue.Barcode#encodeData()
      */
     protected Module[] encodeData() {
+        String data = getData();
         long sum = 0;
         List modules = new ArrayList();
         for (int i = 0; i < data.length(); i++) {
@@ -41,7 +46,7 @@ public class PostNetBarcode extends LinearBarcode {
             modules.add(module);
         }
 
-        //add the check digit
+        // add the check digit
         long check = (10 - (sum % 10));
         if (check == 10) {
             check = 0;
@@ -51,28 +56,36 @@ public class PostNetBarcode extends LinearBarcode {
         return (Module[]) modules.toArray(new PostNetModule[0]);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see net.sourceforge.barbecue.Barcode#getBarcodeWidth(int)
      */
     protected double getBarcodeWidth(int resolution) {
         return 0;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see net.sourceforge.barbecue.Barcode#getPostAmble()
      */
     protected Module getPostAmble() {
         return ModuleFactory.START_STOP;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see net.sourceforge.barbecue.Barcode#getPreAmble()
      */
     protected Module getPreAmble() {
         return ModuleFactory.START_STOP;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.awt.Component#getHeight()
      */
     public int getHeight() {

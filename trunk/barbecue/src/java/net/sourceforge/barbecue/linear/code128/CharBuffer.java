@@ -31,11 +31,11 @@ import java.util.ArrayList;
 
 public final class CharBuffer {
     private final int size;
-    private List chars;
+    private List<Character> chars;
     
     public CharBuffer(int size) {
         this.size = size;
-        this.chars = new ArrayList();
+        this.chars = new ArrayList<Character>();
     }
     
     public int size() {
@@ -50,10 +50,11 @@ public final class CharBuffer {
         return chars.size() == size;
     }
     
+    @Override
     public String toString() {
         char[] out = new char[size];
         for (int i = 0; i < size; i++) {
-            Character character = (Character) chars.get(i);
+            Character character = chars.get(i);
             out[i] = character.charValue();
         }
         return new String(out);

@@ -118,7 +118,7 @@ public class BarcodeServlet extends HttpServlet {
 			barcode.setBarWidth(width.intValue());
 		}
 		if (height != null) {
-			barcode.setBarHeight(height.intValue());
+			barcode.setPreferredBarHeight(height.intValue());
 		}
 		if (resolution != null) {
 			barcode.setResolution(resolution.intValue());

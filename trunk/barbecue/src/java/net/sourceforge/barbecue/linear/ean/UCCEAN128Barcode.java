@@ -191,7 +191,7 @@ public class UCCEAN128Barcode extends Code128Barcode {
 				labelBuffer.append(checkDigit);
 			}
      	}
-		this.data += sb.toString();
+		setData(sb.toString());
 		this.labelData = labelBuffer.toString();
 		this.labelDataEncoded = true;
 }
@@ -261,7 +261,7 @@ public class UCCEAN128Barcode extends Code128Barcode {
      */
     protected Module getPreAmble() {
         CompositeModule module = new CompositeModule();
-        if(drawingQuietSection) {
+        if(isDrawingQuietSection()) {
             module.add(QUIET_SECTION);
         }
         module.add(START_C);
@@ -279,9 +279,9 @@ public class UCCEAN128Barcode extends Code128Barcode {
 			return labelData;
 		}
 
-		if (null != label)
+		if (null != getPureLabel())
 		{
-            return label;
+            return getPureLabel();
         }
 
         return '(' + applicationIdentifier + ") " + labelData + getMod10CheckDigit(labelData, includeCheckDigit);

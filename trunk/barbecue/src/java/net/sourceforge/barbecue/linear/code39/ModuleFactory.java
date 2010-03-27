@@ -213,7 +213,7 @@ public final class ModuleFactory {
         EXT_CHARS.put(new Character('/'), "/O");
         EXT_CHARS.put(new Character(':'), "/Z");
         EXT_CHARS.put(new Character(';'), "%F");
-        EXT_CHARS.put(new Character('«'), "%G");
+        EXT_CHARS.put(new Character('\u00AB'), "%G");
         EXT_CHARS.put(new Character('='), "%H");
         EXT_CHARS.put(new Character('>'), "%I");
         EXT_CHARS.put(new Character('?'), "%J");
