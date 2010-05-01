@@ -56,7 +56,7 @@ public class EAN13Barcode extends UPCABarcode {
     public final static int      PARITY_EVEN        = 0;
     public final static int      PARITY_ODD         = 1;
 
-    public final static int      BARCODE_LENGTH_EAN     = 12;
+    public final static int      BARCODE_LENGTH_EAN = 12;
 
     public final static String   ISBN_NUMBER_SYSTEM = "978";
     public final static int      ISBN_SIZE          = 10;
@@ -76,7 +76,7 @@ public class EAN13Barcode extends UPCABarcode {
     public EAN13Barcode(String data) throws BarcodeException {
         super(data);
     }
-
+    
     @Override
     protected int getBarcodeLength() {
         return BARCODE_LENGTH_EAN;
@@ -287,8 +287,8 @@ public class EAN13Barcode extends UPCABarcode {
     protected Module calculateChecksum() {
         if (requiresChecksum) {
             String data = getData();
-            return EAN13ModuleFactory.getModuleForIndex(data.substring(0,
-                    1), getMod10CheckDigit(data));
+            return EAN13ModuleFactory.getModuleForIndex(data.substring(0, 1),
+                    getMod10CheckDigit(data));
         }
 
         return null;

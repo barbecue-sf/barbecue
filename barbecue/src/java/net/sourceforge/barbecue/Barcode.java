@@ -100,8 +100,8 @@ public abstract class Barcode extends JComponent implements Printable {
         this.data = data;
         update();
     }
-    
-    public void update() {        
+
+    public void update() {
         invalidate();
         updateUI();
         repaint();
@@ -214,7 +214,7 @@ public abstract class Barcode extends JComponent implements Printable {
      */
     @Override
     public Dimension getPreferredSize() {
-        return getActualSize();
+        return calculateSize();
     }
 
     @Override
@@ -254,8 +254,6 @@ public abstract class Barcode extends JComponent implements Printable {
     public void draw(Graphics2D g, int x, int y) throws OutputException {
         g = (Graphics2D) g.create();
         g.setFont(getFont());
-        Output output = new GraphicsOutput(g, getFont(), getForeground(),
-                getBackground());
 
         int text = 0;
         if (isDrawingText()) {
@@ -264,6 +262,22 @@ public abstract class Barcode extends JComponent implements Printable {
             text = (int) Math.ceil(r2d.getHeight());
         }
         int bh = getHeight() - getInsets().top - getInsets().bottom - text;
+
+        {
+            // Scale if necessary
+            Dimension size = calculateSize();
+            if (getWidth() < size.width) {
+                double d = 1.0 * getWidth() / size.width;
+                g.translate(x, y);
+                g.scale(d, d);
+                g.translate(-x, -y);
+
+                bh = (int) Math.round(bh / d);
+            }
+        }
+
+        Output output = new GraphicsOutput(g, getFont(), getForeground(),
+                getBackground());
         draw(output, x, y, barWidth, bh);
     }
 
