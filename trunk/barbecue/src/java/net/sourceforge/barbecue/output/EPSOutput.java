@@ -87,6 +87,7 @@ public class EPSOutput extends AbstractOutput {
         } catch (java.io.IOException ex) {
             System.err.println("IO Exception writing EPS epilogue: "
                     + ex.toString());
+            ex.printStackTrace();
         } finally {
             try {
                 writer.flush();
@@ -94,6 +95,7 @@ public class EPSOutput extends AbstractOutput {
             } catch (IOException e) {
                 System.err.println("IO Exception closing EPS stream: "
                         + e.toString());
+                e.printStackTrace();
             }
         }
     }

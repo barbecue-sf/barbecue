@@ -253,7 +253,19 @@ public abstract class Barcode extends JComponent implements Printable {
      */
     public void draw(Graphics2D g, int x, int y) throws OutputException {
         g = (Graphics2D) g.create();
-        g.setFont(getFont());
+        Color bg = getBackground();
+        Color fg = getForeground();
+        if (bg == null) {
+            bg = Color.WHITE;
+        }
+        if (fg == null) {
+            fg = Color.BLACK;
+        }
+        g.setBackground(bg);
+        g.setColor(fg);
+        if (getFont() != null) {
+            g.setFont(getFont());
+        }
 
         int text = 0;
         if (isDrawingText()) {
@@ -276,7 +288,7 @@ public abstract class Barcode extends JComponent implements Printable {
             }
         }
 
-        Output output = new GraphicsOutput(g, getFont(), getForeground(),
+        Output output = new GraphicsOutput(g, g.getFont(), getForeground(),
                 getBackground());
         draw(output, x, y, barWidth, bh);
     }

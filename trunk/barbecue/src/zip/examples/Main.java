@@ -1,5 +1,3 @@
-import net.sourceforge.barbecue.BarcodeException;
-
 /*
  * Test Harness for calling examples
  * 
@@ -8,35 +6,31 @@ import net.sourceforge.barbecue.BarcodeException;
 
 /**
  * @author Werner Keil
- *
+ * 
  */
 public class Main {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-			try {
-				System.out.println("Running PNG example...");
-				Example ex = new Example();
-				ex.outputtingBarcodeAsPNG();
-				
-				System.out.println("Running JPEG example...");
-				Example1 e1 = new Example1();
-				e1.outputtingBarcodeAsJPEG();
-			}
-			catch (BarcodeException be) {
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        try {
+            System.out.println("Running PNG example...");
+            FormatExample.outputtingBarcodeAsPNG();
 
-	        System.out.println("Error: "+be.getMessage());// Error handling
+            System.out.println("Running JPEG example...");
+            FormatExample.outputtingBarcodeAsJPEG();
 
-	        }
-
-	        catch (Exception er) {
-
-	            	System.out.println("Error: "+er.getMessage());// Error handling
-
-	        }		
-
-	}
-
+            System.out.println("Running Code128 example...");
+            ExampleCode128.outputtingBarcode128x1();
+            ExampleCode128.outputtingBarcode128x2();
+            ExampleCode128.outputtingBarcode128x3();
+            ExampleCode128.outputtingBarcode128x4();
+            
+            // 2HGH328355316700000259000100
+        } catch (Exception er) {
+            System.out.println("Error: " + er.getMessage());
+            er.printStackTrace();
+        }
+    }
 }

@@ -27,20 +27,21 @@
 package net.sourceforge.barbecue.linear.code128;
 
 public final class Accumulator {
-    private int value;
-    
+
+    private int value = 0;
+
     public Accumulator(int startingValue) {
-        this.value = startingValue;
+        add(startingValue);
     }
-    
+
     public int getValue() {
         return value;
     }
-    
+
     public void add(int value) {
         this.value += value;
     }
-    
+
     public void increment() {
         value += 1;
     }
