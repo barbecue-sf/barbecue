@@ -112,9 +112,6 @@ public class GraphicsOutput extends AbstractOutput {
         if (getFont() == null) {
             return 0;
         }
-        TextLayout layout = new TextLayout(text, getFont(), g
-                .getFontRenderContext());
-        labelLayout.setTextLayout(layout);
 
         if (isPainting()) {
             g.setFont(getFont());
@@ -123,7 +120,8 @@ public class GraphicsOutput extends AbstractOutput {
                     .getBackgroundY(), labelLayout.getBackgroundWidth(),
                     labelLayout.getBackgroundHeight());
             g.setColor(getForegroundColor());
-            FontMetrics fm = g.getFontMetrics();
+            TextLayout layout = new TextLayout(text, getFont(), g.getFontRenderContext());
+            labelLayout.setTextLayout(layout);
             layout.draw(g, labelLayout.getTextX(), labelLayout.getTextY());
         }
 
