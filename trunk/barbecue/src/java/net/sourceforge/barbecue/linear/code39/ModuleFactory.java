@@ -45,10 +45,10 @@ public final class ModuleFactory {
      */
     public static final Module START_STOP = new Module(new int[]{1, 2, 1, 1, 2, 1, 2, 1, 1});
 
-    private static final List KEYS = new ArrayList();
-    private static final Map SET = new HashMap();
-    private static final Map EXT_CHARS = new HashMap();
-    private static final List ESCAPE_CHARS = new ArrayList();
+    private static final List<String> KEYS = new ArrayList<String>();
+    private static final Map<String, Module> SET = new HashMap<String, Module>();
+    private static final Map<Character, String> EXT_CHARS = new HashMap<Character, String>();
+    private static final List<String> ESCAPE_CHARS = new ArrayList<String>();
 
     static {
         initBaseSet();

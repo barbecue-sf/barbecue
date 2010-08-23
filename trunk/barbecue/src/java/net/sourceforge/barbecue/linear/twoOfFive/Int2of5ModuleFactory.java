@@ -28,9 +28,6 @@ package net.sourceforge.barbecue.linear.twoOfFive;
 
 import net.sourceforge.barbecue.Module;
 
-import java.util.Map;
-import java.util.HashMap;
-
 /**
  * Interleave 2 of 5 barcode module definitions.
  *

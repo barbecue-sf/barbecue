@@ -1,11 +1,25 @@
 
 package net.sourceforge.barbecue;
 
-import javax.portlet.*;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 
-import java.io.*;
-import java.util.*;
-import net.sourceforge.barbecue.output.*;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.GenericPortlet;
+import javax.portlet.PortletException;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletSession;
+import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+import javax.portlet.ResourceServingPortlet;
+import javax.portlet.ResourceURL;
+
+import net.sourceforge.barbecue.output.OutputException;
 
 /**
  * 

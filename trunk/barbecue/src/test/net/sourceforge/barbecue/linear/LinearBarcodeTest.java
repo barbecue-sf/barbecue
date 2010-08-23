@@ -1,19 +1,18 @@
 package net.sourceforge.barbecue.linear;
 
-import junit.framework.TestCase;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.font.TextLayout;
 
+import junit.framework.TestCase;
 import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.BlankModule;
 import net.sourceforge.barbecue.GraphicsMock;
+import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.env.DefaultEnvironment;
 import net.sourceforge.barbecue.output.GraphicsOutput;
 import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.OutputException;
-import net.sourceforge.barbecue.output.CenteredLabelLayout;
 
 public class LinearBarcodeTest extends TestCase {
 

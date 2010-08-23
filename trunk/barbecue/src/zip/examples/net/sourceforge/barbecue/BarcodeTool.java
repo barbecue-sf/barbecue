@@ -29,17 +29,29 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowAdapter;
 import java.io.File;
 import java.io.FileWriter;
 import java.lang.reflect.Method;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import net.sourceforge.barbecue.*;
 import net.sourceforge.barbecue.formatter.FormattingException;
 import net.sourceforge.barbecue.formatter.SVGFormatter;
 

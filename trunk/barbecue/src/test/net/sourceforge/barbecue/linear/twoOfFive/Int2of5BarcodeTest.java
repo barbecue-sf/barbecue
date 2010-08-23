@@ -26,17 +26,13 @@
 
 package net.sourceforge.barbecue.linear.twoOfFive;
 
+import java.awt.Rectangle;
+import java.util.List;
+
 import junit.framework.TestCase;
-import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.BlankModule;
 import net.sourceforge.barbecue.GraphicsMock;
 import net.sourceforge.barbecue.Module;
-import net.sourceforge.barbecue.SeparatorModule;
-
-import java.text.CharacterIterator;
-import java.util.List;
-import java.awt.*;
 
 public class Int2of5BarcodeTest extends TestCase {
     private Int2of5Barcode b;
@@ -108,9 +104,11 @@ public class Int2of5BarcodeTest extends TestCase {
         }
     }
     
-    private void assertWidth(String data, int expectedWidth) throws Exception {
-        Int2of5Barcode barcode = new Int2of5Barcode(data);
-        barcode.setBarWidth(1);
-        assertEquals(expectedWidth, barcode.getWidth());
-    }
+
+    // private void assertWidth(String data, int expectedWidth) throws Exception
+    // {
+    // Int2of5Barcode barcode = new Int2of5Barcode(data);
+    // barcode.setBarWidth(1);
+    // assertEquals(expectedWidth, barcode.getWidth());
+    // }
 }

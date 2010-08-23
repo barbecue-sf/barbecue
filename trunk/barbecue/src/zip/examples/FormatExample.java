@@ -1,15 +1,15 @@
-import javax.swing.*;
-import net.sourceforge.barbecue.BarcodeFactory;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.JPanel;
+
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.BarcodeFactory;
 import net.sourceforge.barbecue.BarcodeImageHandler;
-import net.sourceforge.barbecue.env.Environment;
-import net.sourceforge.barbecue.env.EnvironmentFactory;
 import net.sourceforge.barbecue.output.OutputException;
-
-import java.awt.image.BufferedImage;
-import java.awt.*;
-import java.io.*;
 
 public class FormatExample {
 

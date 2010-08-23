@@ -284,7 +284,7 @@ public class UPCABarcode extends LinearBarcode {
     protected Module[] encodeData() {
         String data = getData();
         width = 0;
-        List modules = new ArrayList();
+        List<Module> modules = new ArrayList<Module>();
         Module module = null;
         int len = data.length();
         char c;

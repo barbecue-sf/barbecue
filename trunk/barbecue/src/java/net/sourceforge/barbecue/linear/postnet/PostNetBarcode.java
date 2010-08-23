@@ -38,7 +38,7 @@ public class PostNetBarcode extends LinearBarcode {
     protected Module[] encodeData() {
         String data = getData();
         long sum = 0;
-        List modules = new ArrayList();
+        List<Module> modules = new ArrayList<Module>();
         for (int i = 0; i < data.length(); i++) {
             String c = String.valueOf(data.charAt(i));
             Module module = ModuleFactory.getModule(c);
