@@ -2,17 +2,13 @@
 
 // TODO merge into Example.java
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 import net.sourceforge.barbecue.Barcode;
-
-import net.sourceforge.barbecue.BarcodeFactory;
-
-import net.sourceforge.barbecue.BarcodeImageHandler;
-
 import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.env.Environment;
-import net.sourceforge.barbecue.env.EnvironmentFactory;
+import net.sourceforge.barbecue.BarcodeFactory;
+import net.sourceforge.barbecue.BarcodeImageHandler;
 import net.sourceforge.barbecue.output.OutputException;
 
 public class ExampleCode128 {

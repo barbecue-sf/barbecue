@@ -39,12 +39,12 @@ import java.util.Map;
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
 public final class ModuleFactory {
-    private static final List A_KEYS = new ArrayList();
-    private static final List B_KEYS = new ArrayList();
-    private static final List C_KEYS = new ArrayList();
-    private static final Map A_SET = new HashMap();
-    private static final Map B_SET = new HashMap();
-    private static final Map C_SET = new HashMap();
+    private static final List<String> A_KEYS = new ArrayList<String>();
+    private static final List<String> B_KEYS = new ArrayList<String>();
+    private static final List<String> C_KEYS = new ArrayList<String>();
+    private static final Map<String, Module> A_SET = new HashMap<String, Module>();
+    private static final Map<String, Module> B_SET = new HashMap<String, Module>();
+    private static final Map<String, Module> C_SET = new HashMap<String, Module>();
     
     static {
         initA();

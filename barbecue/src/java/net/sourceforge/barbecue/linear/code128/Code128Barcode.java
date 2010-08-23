@@ -350,7 +350,7 @@ public class Code128Barcode extends LinearBarcode {
         }
     }
     
-    private void encode(List modules, String data) {
+    private void encode(List<Module> modules, String data) {
         Module module = ModuleFactory.getModule(data, mode);
         updateCheckSum(data);
         checkShift(module);

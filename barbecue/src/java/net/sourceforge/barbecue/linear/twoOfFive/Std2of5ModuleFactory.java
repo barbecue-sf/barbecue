@@ -37,13 +37,13 @@ import java.util.HashMap;
  * @author <a href="mailto:james@metalskin.com">James Jenner</a>
  */
 class Std2of5ModuleFactory {
-    protected static final Map SET = new HashMap();
+    protected static final Map<String, int[]> SET = new HashMap<String, int[]>();
     
     public static final Module START_CHAR = new Module(new int[] {3, 1, 3, 1, 1, 1});
     public static final Module END_CHAR = new Module(new int[] {3, 1, 1, 1, 3, 1});
     
-    private final static int CHECKSUM_WEIGHT_EVEN = 1;
-    private final static int CHECKSUM_WEIGHT_ODD = 3;
+    // private final static int CHECKSUM_WEIGHT_EVEN = 1;
+    // private final static int CHECKSUM_WEIGHT_ODD = 3;
     
     static {
         init();

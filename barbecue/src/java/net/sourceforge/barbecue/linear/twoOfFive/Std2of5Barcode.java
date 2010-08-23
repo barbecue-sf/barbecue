@@ -26,17 +26,15 @@
 
 package net.sourceforge.barbecue.linear.twoOfFive;
 
-import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.BlankModule;
-import net.sourceforge.barbecue.Module;
-import net.sourceforge.barbecue.Modulo10;
-import net.sourceforge.barbecue.SeparatorModule;
-import net.sourceforge.barbecue.linear.LinearBarcode;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.Module;
+import net.sourceforge.barbecue.Modulo10;
+import net.sourceforge.barbecue.linear.LinearBarcode;
 
 /**
  * This is a concrete implementation of the Standard 2 of 5 barcode
@@ -90,7 +88,7 @@ public class Std2of5Barcode extends LinearBarcode {
      */
     protected Module[] encodeData() {
         String data = getData();
-        List modules = new ArrayList();
+        List<Module> modules = new ArrayList<Module>();
         
         for(int i = 0; i < data.length(); i++) {
             Module module = Std2of5ModuleFactory.getModule(String.valueOf(data.charAt(i)));

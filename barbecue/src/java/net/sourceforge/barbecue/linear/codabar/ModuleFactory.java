@@ -37,7 +37,7 @@ import java.util.HashMap;
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
 final class ModuleFactory {
-	private static final Map SET = new HashMap();
+	private static final Map<String, Module> SET = new HashMap<String, Module>();
 
 	static {
 		init();

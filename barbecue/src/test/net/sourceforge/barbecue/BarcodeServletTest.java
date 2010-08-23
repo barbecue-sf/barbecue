@@ -54,13 +54,13 @@ public class BarcodeServletTest extends BarcodeTestCase {
     private BarcodeServletMock      servlet;
     private HttpServletResponseMock res;
     private HttpServletRequestMock  req;
-    private Map                     params;
+    private Map<String, String>     params;
 
     protected void setUp() throws Exception {
         super.setUp();
         servlet = new BarcodeServletMock();
         req = new HttpServletRequestMock();
-        params = new HashMap();
+        params = new HashMap<String, String>();
         params.put("data", "1234567890");
         params.put("type", "SSCC18");
         params.put("resolution", "100");

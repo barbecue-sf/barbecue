@@ -14,8 +14,8 @@ public class ModuleFactory {
 
     public static final PostNetModule START_STOP = new PostNetModule(new int[]{1});
 
-    private static final List KEYS = new ArrayList();
-    private static final Map SET = new HashMap();
+    private static final List<String> KEYS = new ArrayList<String>();
+    private static final Map<String, Module> SET = new HashMap<String, Module>();
 
     static {
         initBaseSet();

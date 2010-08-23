@@ -49,11 +49,11 @@ public class ModuleFactory {
     public final static Module LEFT_MARGIN = new BlankModule(11);
     public final static Module RIGHT_MARGIN = new BlankModule(11);;
     
-    protected static final List KEYS_LEFT = new ArrayList();
-    protected static final List KEYS_RIGHT = new ArrayList();
+    protected static final List<String> KEYS_LEFT = new ArrayList<String>();
+    protected static final List<String> KEYS_RIGHT = new ArrayList<String>();
     
-    protected static final Map SET_LEFT = new HashMap();
-    protected static final Map SET_RIGHT = new HashMap();
+    protected static final Map<String, Module> SET_LEFT = new HashMap<String, Module>();
+    protected static final Map<String, Module> SET_RIGHT = new HashMap<String, Module>();
     
     public static final int LEFT_WIDTH = 6;
     public static final int GUARD_CHAR_SIZE = 1;

@@ -50,7 +50,7 @@ public final class BarcodeImageHandler {
     private static Set formats;
 
     static {
-        Set s = new HashSet();
+        Set<String> s = new HashSet<String>();
         s.add("gif");
         s.add("jpeg");
         s.add("png");

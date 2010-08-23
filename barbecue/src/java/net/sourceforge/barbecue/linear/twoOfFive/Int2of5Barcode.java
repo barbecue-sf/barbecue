@@ -26,17 +26,12 @@
 
 package net.sourceforge.barbecue.linear.twoOfFive;
 
-import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.BlankModule;
-import net.sourceforge.barbecue.Module;
-import net.sourceforge.barbecue.Modulo10;
-import net.sourceforge.barbecue.SeparatorModule;
-import net.sourceforge.barbecue.linear.LinearBarcode;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
+
+import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.Module;
+import net.sourceforge.barbecue.Modulo10;
 
 /**
  * This is a concrete implementation of the Interleave 2 of 5 barcode
@@ -103,12 +98,13 @@ public class Int2of5Barcode extends Std2of5Barcode {
      * @return The encoded bar data
      */
     protected Module[] encodeData() {
-        List modules = new ArrayList();
+        List<Module> modules = new ArrayList<Module>();
 
         String data = getData();
         for (int i = 0; i < data.length() - 1; i += 2) {
-            Module module = Int2of5ModuleFactory.getModule(String.valueOf(data
-                    .charAt(i)), String.valueOf(data.charAt(i + 1)));
+            Module module = Int2of5ModuleFactory.getModule(
+                    String.valueOf(data.charAt(i)),
+                    String.valueOf(data.charAt(i + 1)));
 
             modules.add(module);
         }

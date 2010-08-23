@@ -27,17 +27,8 @@
 package net.sourceforge.barbecue.linear.upc;
 
 import junit.framework.TestCase;
-import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.BlankModule;
-import net.sourceforge.barbecue.GraphicsMock;
 import net.sourceforge.barbecue.Module;
-import net.sourceforge.barbecue.SeparatorModule;
-
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
-import java.util.List;
-import java.awt.*;
 
 public class UPCABarcodeTest extends TestCase {
     private UPCAMock b;
