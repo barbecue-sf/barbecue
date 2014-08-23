@@ -26,14 +26,18 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue;
 
-import junit.framework.TestCase;
-
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.List;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
-import net.sourceforge.barbecue.env.*;
+import junit.framework.TestCase;
+import net.sourceforge.barbecue.env.EnvironmentFactory;
+import net.sourceforge.barbecue.env.HeadlessEnvironment;
 import net.sourceforge.barbecue.output.Output;
 
 public class BarcodeTest extends TestCase {
@@ -104,8 +108,8 @@ public class BarcodeTest extends TestCase {
 		barcode.setBackground(Color.cyan);
 		GraphicsMock g = new GraphicsMock();
 		barcode.paintComponent(g);
-		List colors = g.getColors();
-		for (Iterator iterator = colors.iterator(); iterator.hasNext();) {
+		List<Color> colors = g.getColors();
+		for (Iterator<Color> iterator = colors.iterator(); iterator.hasNext();) {
 			Color color = (Color) iterator.next();
 			assertTrue(isSameColor(color, Color.blue) || isSameColor(color, Color.cyan) || isSameColor(color, g.getColor()));
 		}
@@ -196,6 +200,8 @@ public class BarcodeTest extends TestCase {
 	}
 
 	public class BarcodeMock extends Barcode {
+		private static final long serialVersionUID = -2174347100120269219L;
+
 		public BarcodeMock(String data) throws BarcodeException {
 			this(data, true);
 		}

@@ -26,16 +26,17 @@
 
 package net.sourceforge.barbecue.output;
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.DocType;
-import org.jdom.Namespace;
-import org.jdom.output.XMLOutputter;
-
+import java.awt.Color;
+import java.awt.Font;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.awt.*;
+
+import org.jdom.DocType;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.Namespace;
+import org.jdom.output.XMLOutputter;
 
 /**
  * SVG outputter to output barcodes as SVG files.

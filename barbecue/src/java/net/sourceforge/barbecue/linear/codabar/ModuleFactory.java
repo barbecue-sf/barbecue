@@ -26,10 +26,10 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.linear.codabar;
 
-import net.sourceforge.barbecue.Module;
-
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+
+import net.sourceforge.barbecue.Module;
 
 /**
  * Codabar barcode module definitions.

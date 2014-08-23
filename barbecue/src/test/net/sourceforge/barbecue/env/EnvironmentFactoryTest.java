@@ -26,9 +26,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.env;
 
-import junit.framework.TestCase;
+import java.awt.Font;
 
-import java.awt.*;
+import junit.framework.TestCase;
 
 // Note: Deliberately not a BarcodeTestCase
 public class EnvironmentFactoryTest extends TestCase {

@@ -26,7 +26,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.env;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Toolkit;
 
 /**
  * An environment that represents machines that have access to the

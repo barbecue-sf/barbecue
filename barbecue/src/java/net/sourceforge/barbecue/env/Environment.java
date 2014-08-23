@@ -26,7 +26,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.env;
 
-import java.awt.*;
+import java.awt.Font;
 
 /**
  * Provides a way of accessing operating environment specific

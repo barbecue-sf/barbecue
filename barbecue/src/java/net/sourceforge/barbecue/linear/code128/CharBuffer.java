@@ -26,8 +26,8 @@
 
 package net.sourceforge.barbecue.linear.code128;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public final class CharBuffer {
     private final int size;

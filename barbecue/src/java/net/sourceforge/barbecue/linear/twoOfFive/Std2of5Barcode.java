@@ -49,7 +49,9 @@ import net.sourceforge.barbecue.linear.LinearBarcode;
  * @author <a href="mailto:james@metalskin.com">James Jenner</a>
  */
 public class Std2of5Barcode extends LinearBarcode {
-    private String label;
+	private static final long serialVersionUID = 7529265074170934996L;
+	
+	private String label;
     
     /**
      * Constructs a new Standard 2 of 5 barcode with the specified data.
@@ -125,7 +127,6 @@ public class Std2of5Barcode extends LinearBarcode {
     
     protected void validateData() throws BarcodeException {
         String data = getData();
-        int index = 0;
         StringBuffer buf = new StringBuffer();
         StringCharacterIterator iter = new StringCharacterIterator(data);
         for (char c = iter.first(); c != CharacterIterator.DONE; c = iter.next()) {
@@ -136,7 +137,6 @@ public class Std2of5Barcode extends LinearBarcode {
                 }
                 buf.append(c);
             }
-            index += 1;
         }
         setData(buf.toString());
     }

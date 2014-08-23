@@ -26,13 +26,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue;
 
-import junit.framework.TestCase;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import net.sourceforge.barbecue.output.Output;
+import junit.framework.TestCase;
 import net.sourceforge.barbecue.output.GraphicsOutput;
+import net.sourceforge.barbecue.output.Output;
 
 public class CompositeModuleTest extends TestCase {
 	private ModuleMock m1;

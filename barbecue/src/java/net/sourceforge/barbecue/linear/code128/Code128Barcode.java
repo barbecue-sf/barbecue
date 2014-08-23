@@ -26,14 +26,14 @@
 
 package net.sourceforge.barbecue.linear.code128;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BlankModule;
 import net.sourceforge.barbecue.CompositeModule;
 import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.linear.LinearBarcode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is a concrete implementation of the Code 128 barcode. It fully supports all three
@@ -43,7 +43,9 @@ import java.util.List;
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
 public class Code128Barcode extends LinearBarcode {
-    /** Character set A flag */
+	private static final long serialVersionUID = -1281483345032474604L;
+	
+	/** Character set A flag */
     public static final int A = 0;
     /** Character set B flag */
     public static final int B = 1;

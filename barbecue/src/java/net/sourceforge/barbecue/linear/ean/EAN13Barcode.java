@@ -26,6 +26,10 @@
 
 package net.sourceforge.barbecue.linear.ean;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.linear.upc.UPCABarcode;
@@ -33,17 +37,15 @@ import net.sourceforge.barbecue.output.LabelLayoutFactory;
 import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.OutputException;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * This is a concrete implementation of the EAN13 barcode.
  * 
  * @author <a href="mailto:james@metalskin.com">James Jenner</a>
  */
 public class EAN13Barcode extends UPCABarcode {
-    /**
+	private static final long serialVersionUID = 4757074130184410142L;
+
+	/**
      * A list of type identifiers for the EAN13 barcode format
      */
     public static final String[] TYPES              = new String[] { "EAN-13",

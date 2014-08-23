@@ -26,18 +26,19 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue;
 
-import net.sourceforge.barbecue.env.*;
-import net.sourceforge.barbecue.linear.code39.Code39Barcode;
-import net.sourceforge.barbecue.output.OutputException;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.lang.reflect.InvocationTargetException;
+
+import net.sourceforge.barbecue.env.EnvironmentFactory;
+import net.sourceforge.barbecue.linear.code39.Code39Barcode;
+import net.sourceforge.barbecue.output.OutputException;
 
 /**
  * The query parameters for this servlet are:
@@ -66,6 +67,8 @@ import java.lang.reflect.InvocationTargetException;
  * 
  */
 public class BarcodeServlet extends HttpServlet {
+	private static final long serialVersionUID = -2894746206965374765L;
+
 	/**
 	 * From HttpServlet.
 	 * @return The literal string 'barbecue'

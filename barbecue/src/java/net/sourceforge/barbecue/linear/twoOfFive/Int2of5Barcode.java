@@ -46,7 +46,9 @@ import net.sourceforge.barbecue.Modulo10;
  * @author <a href="mailto:james@metalskin.com">James Jenner</a>
  */
 public class Int2of5Barcode extends Std2of5Barcode {
-    /**
+	private static final long serialVersionUID = -7923210087702327350L;
+
+	/**
      * Constructs a new Interleave 2 of 5 barcode with the specified data. No
      * check digit will be added
      * 

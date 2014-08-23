@@ -26,12 +26,12 @@
 
 package net.sourceforge.barbecue.output;
 
-import net.sourceforge.barbecue.env.DefaultEnvironment;
-
+import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.awt.*;
+
+import net.sourceforge.barbecue.env.DefaultEnvironment;
 
 /**
  * EPS outputter to output barcodes as Encapsulated Postscript files.

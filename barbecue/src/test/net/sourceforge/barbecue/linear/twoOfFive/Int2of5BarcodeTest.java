@@ -94,7 +94,7 @@ public class Int2of5BarcodeTest extends TestCase {
             1, 1, 1, 1, 1, 3, 3, 3, 3, 1, // 7 & 0 - 101010001110001110
             2, 1, 1 // stop char
         };
-        List rects = g.getRects();
+        List<Rectangle> rects = g.getRects();
 
         assertEquals(47, rects.size());
 

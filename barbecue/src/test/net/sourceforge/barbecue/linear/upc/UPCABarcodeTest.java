@@ -88,7 +88,9 @@ public class UPCABarcodeTest extends TestCase {
     }
     
     private class UPCAMock extends UPCABarcode {
-        public UPCAMock(String data) throws BarcodeException {
+		private static final long serialVersionUID = 7370946491778510028L;
+
+		public UPCAMock(String data) throws BarcodeException {
             super(data);
         }
         

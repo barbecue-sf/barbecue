@@ -3,8 +3,9 @@ package net.sourceforge.barbecue.linear.ean;
 import net.sourceforge.barbecue.BarcodeException;
 
 public class BooklandBarcode extends EAN13Barcode {
+	private static final long serialVersionUID = 7133934381567708979L;
 
-    public BooklandBarcode(String isbn) throws BarcodeException {
+	public BooklandBarcode(String isbn) throws BarcodeException {
         super(processIsbn(isbn));
     }
 

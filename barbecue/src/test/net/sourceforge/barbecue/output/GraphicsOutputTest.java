@@ -26,14 +26,16 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.output;
 
-import net.sourceforge.barbecue.BarcodeTestCase;
-import net.sourceforge.barbecue.GraphicsMock;
-import net.sourceforge.barbecue.env.DefaultEnvironment;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
 import java.util.List;
+
+import net.sourceforge.barbecue.BarcodeTestCase;
+import net.sourceforge.barbecue.GraphicsMock;
+import net.sourceforge.barbecue.env.DefaultEnvironment;
 
 public class GraphicsOutputTest extends BarcodeTestCase {
     private Color          fgColour;
@@ -52,7 +54,7 @@ public class GraphicsOutputTest extends BarcodeTestCase {
 
     public void testDrawBarDrawsRectangle() throws Exception {
         output.drawBar(0, 0, 10, 100, true);
-        List rects = g.getRects();
+        List<Rectangle> rects = g.getRects();
         assertEquals(1, rects.size());
         assertEquals(new Rectangle(0, 0, 10, 100), rects.get(0));
         assertEquals(g.getColor(), fgColour);
@@ -70,7 +72,7 @@ public class GraphicsOutputTest extends BarcodeTestCase {
                 DefaultEnvironment.DEFAULT_FONT, g.getFontRenderContext());
         output.drawText(text, LabelLayoutFactory
                 .createCenteredLayout(0, 0, 100));
-        List rects = g.getRects();
+        List<Rectangle> rects = g.getRects();
         assertEquals(1, rects.size());
         assertEquals(new Rectangle(0, 0, 100, (int) (layout.getBounds()
                 .getHeight()

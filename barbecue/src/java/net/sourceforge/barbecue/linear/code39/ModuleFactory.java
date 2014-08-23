@@ -26,12 +26,12 @@
 
 package net.sourceforge.barbecue.linear.code39;
 
-import net.sourceforge.barbecue.Module;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.sourceforge.barbecue.Module;
 
 /**
  * The Code 39 barcode module definitions.

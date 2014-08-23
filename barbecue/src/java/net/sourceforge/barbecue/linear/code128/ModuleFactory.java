@@ -26,12 +26,12 @@
 
 package net.sourceforge.barbecue.linear.code128;
 
-import net.sourceforge.barbecue.Module;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.sourceforge.barbecue.Module;
 
 /**
  * Code 128 barcode module definitions.
@@ -432,7 +432,7 @@ public final class ModuleFactory {
      * @return The index for the given key
      */
     public static int getIndex(String key, int mode) {
-        List keys = getKeys(mode);
+        List<String> keys = getKeys(mode);
         return keys.indexOf(key);
     }
     
@@ -444,11 +444,11 @@ public final class ModuleFactory {
      * @return The module at the specified index
      */
     public static Module getModuleForIndex(int index, int mode) {
-        List keys = getKeys(mode);
+        List<String> keys = getKeys(mode);
         return getModule((String) keys.get(index), mode);
     }
     
-    private static List getKeys(int mode) {
+    private static List<String> getKeys(int mode) {
         switch (mode) {
             case Code128Barcode.A:
                 return A_KEYS;

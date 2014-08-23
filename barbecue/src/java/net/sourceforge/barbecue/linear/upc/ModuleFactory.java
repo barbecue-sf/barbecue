@@ -26,13 +26,13 @@
 
 package net.sourceforge.barbecue.linear.upc;
 
-import net.sourceforge.barbecue.Module;
-import net.sourceforge.barbecue.BlankModule;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.sourceforge.barbecue.BlankModule;
+import net.sourceforge.barbecue.Module;
 
 /**
  * The UPC-A barcode module definitions.

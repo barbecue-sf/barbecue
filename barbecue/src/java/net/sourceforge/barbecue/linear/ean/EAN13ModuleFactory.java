@@ -26,14 +26,14 @@
 
 package net.sourceforge.barbecue.linear.ean;
 
-import net.sourceforge.barbecue.BlankModule;
-import net.sourceforge.barbecue.Module;
-import net.sourceforge.barbecue.linear.upc.ModuleFactory;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.sourceforge.barbecue.BlankModule;
+import net.sourceforge.barbecue.Module;
+import net.sourceforge.barbecue.linear.upc.ModuleFactory;
 
 /**
  * The EAN 13 barcode module definitions.

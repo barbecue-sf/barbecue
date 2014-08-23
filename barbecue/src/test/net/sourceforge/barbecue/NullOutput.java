@@ -26,8 +26,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue;
 
-import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.LabelLayout;
+import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.OutputException;
 
 public class NullOutput implements Output {
