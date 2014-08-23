@@ -26,16 +26,16 @@
 
 package net.sourceforge.barbecue.linear.code39;
 
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.CompositeModule;
 import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.SeparatorModule;
 import net.sourceforge.barbecue.linear.LinearBarcode;
-
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is a concrete implementation of the Code 39 barcode, AKA 3of9,
@@ -44,7 +44,9 @@ import java.util.List;
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
 public class Code39Barcode extends LinearBarcode {
-    /**
+	private static final long serialVersionUID = -6099928228423812132L;
+	
+	/**
      * A list of type identifiers for the Code39 barcode format
      */
     public static final String[] TYPES = new String[]{

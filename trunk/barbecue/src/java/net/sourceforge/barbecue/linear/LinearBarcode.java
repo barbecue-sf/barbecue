@@ -1,5 +1,7 @@
 package net.sourceforge.barbecue.linear;
 
+import java.awt.Dimension;
+
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.Module;
@@ -7,11 +9,10 @@ import net.sourceforge.barbecue.output.LabelLayoutFactory;
 import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.OutputException;
 
-import java.awt.*;
-
 public abstract class LinearBarcode extends Barcode {
+	private static final long serialVersionUID = -6552794597659175908L;
 
-    protected LinearBarcode(String data) throws BarcodeException {
+	protected LinearBarcode(String data) throws BarcodeException {
         super(data);
     }
 

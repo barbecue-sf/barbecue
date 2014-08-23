@@ -26,7 +26,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.env;
 
-import java.awt.*;
+import java.awt.Toolkit;
 
 public class DefaultEnvironmentTest extends EnvironmentTestCase {
 

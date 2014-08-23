@@ -26,7 +26,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.env;
 
-import java.awt.*;
+import java.awt.Font;
 
 /**
  * An environment used when the machine running barbecue is in
@@ -35,6 +35,9 @@ import java.awt.*;
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
 public final class HeadlessEnvironment implements Environment {
+    /** The default font for drawing the barcode data underneath the bars */
+	public static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 20);
+	
 	/**
 	 * The default output resolution (in DPI) for barcodes in headless mode.
 	 */
@@ -51,9 +54,9 @@ public final class HeadlessEnvironment implements Environment {
 
     /**
      * Returns the default font for the environment.
-     * @return null
+     * @return The default font for the environment
      */
     public Font getDefaultFont() {
-        return null;
+        return DEFAULT_FONT;
     }
 }

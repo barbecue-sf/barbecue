@@ -26,11 +26,20 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue;
 
-import java.io.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.imageio.ImageIO;
-import java.util.*;
+
 import net.sourceforge.barbecue.output.OutputException;
 
 /**
@@ -47,7 +56,7 @@ import net.sourceforge.barbecue.output.OutputException;
  */
 public final class BarcodeImageHandler {
 
-    private static Set formats;
+    private static Set<String> formats;
 
     static {
         Set<String> s = new HashSet<String>();
@@ -57,7 +66,7 @@ public final class BarcodeImageHandler {
         formats = Collections.unmodifiableSet(s);
     }
 
-    static public Set getImageFormats() {
+    static public Set<String> getImageFormats() {
         return formats;
     }
 

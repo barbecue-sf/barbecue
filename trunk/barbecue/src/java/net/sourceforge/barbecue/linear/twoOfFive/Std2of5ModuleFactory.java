@@ -26,10 +26,10 @@
 
 package net.sourceforge.barbecue.linear.twoOfFive;
 
-import net.sourceforge.barbecue.Module;
-
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+
+import net.sourceforge.barbecue.Module;
 
 /**
  * Standard 2 of 5 barcode module definitions.

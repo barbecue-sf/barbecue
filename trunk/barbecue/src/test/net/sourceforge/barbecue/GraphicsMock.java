@@ -26,10 +26,19 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.Image;
+import java.awt.Paint;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
@@ -39,6 +48,9 @@ import java.awt.image.ImageObserver;
 import java.awt.image.RenderedImage;
 import java.awt.image.renderable.RenderableImage;
 import java.text.AttributedCharacterIterator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class GraphicsMock extends Graphics2D {
     private List<Color>     colors;
@@ -80,11 +92,11 @@ public class GraphicsMock extends Graphics2D {
         return new Rectangle(minX, minY, maxX, maxY);
     }
 
-    public List getColors() {
+    public List<Color> getColors() {
         return colors;
     }
 
-    public List getRects() {
+    public List<Rectangle> getRects() {
         return rects;
     }
 
@@ -171,10 +183,10 @@ public class GraphicsMock extends Graphics2D {
         return null;
     }
 
-    public void setRenderingHints(Map hints) {
+    public void setRenderingHints(Map<?, ?> hints) {
     }
 
-    public void addRenderingHints(Map hints) {
+    public void addRenderingHints(Map<?, ?> hints) {
     }
 
     public RenderingHints getRenderingHints() {
@@ -434,7 +446,7 @@ public class GraphicsMock extends Graphics2D {
         }
     }
 
-    public List getStrings() {
+    public List<String> getStrings() {
         return strings;
     }
 

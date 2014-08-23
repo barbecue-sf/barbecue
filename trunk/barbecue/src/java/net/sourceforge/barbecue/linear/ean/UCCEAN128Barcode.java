@@ -26,6 +26,10 @@
 
 package net.sourceforge.barbecue.linear.ean;
 
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+import java.util.StringTokenizer;
+
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.CompositeModule;
 import net.sourceforge.barbecue.Module;
@@ -33,10 +37,6 @@ import net.sourceforge.barbecue.linear.code128.Accumulator;
 import net.sourceforge.barbecue.linear.code128.CharBuffer;
 import net.sourceforge.barbecue.linear.code128.Code128Barcode;
 import net.sourceforge.barbecue.linear.code128.ModuleFactory;
-
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
-import java.util.StringTokenizer;
 
 /**
  * An implementation of the UCC 128 and EAN 128 code formats. These are almost identical
@@ -48,7 +48,9 @@ import java.util.StringTokenizer;
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
 public class UCCEAN128Barcode extends Code128Barcode {
-    /**
+	private static final long serialVersionUID = 415101013502937729L;
+	
+	/**
      * SSCC-18 application identifier.
      */
     public static final String SSCC_18_AI = "00";

@@ -35,6 +35,7 @@ package net.sourceforge.barbecue;
  * 
  */
 public class BarcodeException extends Exception {
+	private static final long serialVersionUID = -1866455529168474388L;
 
 	/**
 	 * Constructs a new barcode exception with the specified error message.

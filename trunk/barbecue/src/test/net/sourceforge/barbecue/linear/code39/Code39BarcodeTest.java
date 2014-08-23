@@ -26,12 +26,16 @@
 
 package net.sourceforge.barbecue.linear.code39;
 
-import net.sourceforge.barbecue.*;
-
-import java.awt.*;
+import java.awt.Rectangle;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.List;
+
+import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.BarcodeTestCase;
+import net.sourceforge.barbecue.GraphicsMock;
+import net.sourceforge.barbecue.Module;
+import net.sourceforge.barbecue.SeparatorModule;
 
 public class Code39BarcodeTest extends BarcodeTestCase {
     private Code39Barcode barcode;
@@ -178,7 +182,7 @@ public class Code39BarcodeTest extends BarcodeTestCase {
             1, // Separator
             1, 2, 1, 1, 2, 1, 2, 1, 1 	// STOP
         };
-        List rects = g.getRects();
+        List<Rectangle> rects = g.getRects();
         assertEquals(89, rects.size());
         for (int i = 0; i < rects.size(); i++) {
             Rectangle rectangle = (Rectangle) rects.get(i);
@@ -212,7 +216,7 @@ public class Code39BarcodeTest extends BarcodeTestCase {
             1, // Separator
             1, 2, 1, 1, 2, 1, 2, 1, 1 	// STOP
         };
-        List rects = g.getRects();
+        List<Rectangle> rects = g.getRects();
         assertEquals(79, rects.size());
         for (int i = 0; i < rects.size(); i++) {
             Rectangle rectangle = (Rectangle) rects.get(i);

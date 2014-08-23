@@ -43,7 +43,6 @@ import java.text.StringCharacterIterator;
 import javax.swing.JComponent;
 
 import net.sourceforge.barbecue.env.EnvironmentFactory;
-import net.sourceforge.barbecue.env.HeadlessEnvironment;
 import net.sourceforge.barbecue.output.GraphicsOutput;
 import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.OutputException;
@@ -57,8 +56,9 @@ import net.sourceforge.barbecue.output.SizingOutput;
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
 public abstract class Barcode extends JComponent implements Printable {
-
-    private static final int MIN_BAR_HEIGHT      = 0;
+	private static final long serialVersionUID = -8208085266619202707L;
+	
+	private static final int MIN_BAR_HEIGHT      = 0;
     private static final int DEFAULT_BAR_HEIGHT  = 30;
 
     private String           data;
@@ -390,27 +390,43 @@ public abstract class Barcode extends JComponent implements Printable {
     // return calculateSize();
     // }
 
+//    private Dimension calculateSize() {
+//        Dimension d = new Dimension();
+//        if (EnvironmentFactory.getEnvironment() instanceof HeadlessEnvironment) {
+//            try {
+//                d = draw(new SizingOutput(getFont(), getForeground(),
+//                        getBackground()), 0, 0, barWidth,
+//                        getPreferredBarHeight());
+//            } catch (OutputException e) {
+//            }
+//        } else {
+//            try {
+//                FontMetrics fontMetrics = null;
+//                if (getFont() != null) {
+//                    fontMetrics = getFontMetrics(getFont());
+//                }
+//                d = draw(new SizingOutput(getFont(), fontMetrics,
+//                        getForeground(), getBackground()), 0, 0, barWidth,
+//                        getPreferredBarHeight());
+//            } catch (OutputException e) {
+//                // Nothing to do
+//            }
+//        }
+//
+//        return d;
+//    }
     private Dimension calculateSize() {
         Dimension d = new Dimension();
-        if (EnvironmentFactory.getEnvironment() instanceof HeadlessEnvironment) {
-            try {
-                d = draw(new SizingOutput(getFont(), getForeground(),
-                        getBackground()), 0, 0, barWidth,
-                        getPreferredBarHeight());
-            } catch (OutputException e) {
+        try {
+            FontMetrics fontMetrics = null;
+            if (getFont() != null) {
+                fontMetrics = getFontMetrics(getFont());
             }
-        } else {
-            try {
-                FontMetrics fontMetrics = null;
-                if (getFont() != null) {
-                    fontMetrics = getFontMetrics(getFont());
-                }
-                d = draw(new SizingOutput(getFont(), fontMetrics,
-                        getForeground(), getBackground()), 0, 0, barWidth,
-                        getPreferredBarHeight());
-            } catch (OutputException e) {
-                // Nothing to do
-            }
+            d = draw(new SizingOutput(getFont(), fontMetrics,
+                    getForeground(), getBackground()), 0, 0, barWidth,
+                    getPreferredBarHeight());
+        } catch (OutputException e) {
+            // Nothing to do
         }
 
         return d;

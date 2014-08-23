@@ -26,6 +26,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.linear.codabar;
 
+import java.awt.Rectangle;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+import java.util.List;
+
 import junit.framework.TestCase;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
@@ -33,11 +38,6 @@ import net.sourceforge.barbecue.BlankModule;
 import net.sourceforge.barbecue.GraphicsMock;
 import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.SeparatorModule;
-
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
-import java.util.List;
-import java.awt.*;
 
 public class CodabarBarcodeTest extends TestCase {
 	private CodabarBarcode b;
@@ -168,7 +168,7 @@ public class CodabarBarcodeTest extends TestCase {
 			1, 1, 1, 2, 1, 2, 2,	// B
 			0 // Quiet zone
 		};
-		List rects = g.getRects();
+		List<Rectangle> rects = g.getRects();
 		assertEquals(41, rects.size());
 		for (int i=0; i<rects.size(); i++) {
 			Rectangle rectangle = (Rectangle) rects.get(i);

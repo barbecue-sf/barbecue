@@ -26,16 +26,17 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.twod.pdf417;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BlankModule;
 import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.linear.LinearBarcode;
-import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.GraphicsOutput;
+import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.OutputException;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Implementation of the PDF417 two dimensional barcode format.
@@ -48,8 +49,9 @@ import java.awt.image.BufferedImage;
 // TODO: Make this extend TwoDimensionalBarcode (and implement that) - NOT
 // linear barcode
 public class PDF417Barcode extends LinearBarcode {
-    
-    private PDF417Module module;
+	private static final long serialVersionUID = 1029593269783351705L;
+	
+	private PDF417Module module;
 
     /**
      * Constructs a new new PDF417 barcode with the specified data.

@@ -1,11 +1,11 @@
 package net.sourceforge.barbecue.formatter;
 
-import net.sourceforge.barbecue.Barcode;
-import net.sourceforge.barbecue.output.SVGOutput;
-import net.sourceforge.barbecue.output.OutputException;
-
-import java.io.Writer;
 import java.io.StringWriter;
+import java.io.Writer;
+
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.output.OutputException;
+import net.sourceforge.barbecue.output.SVGOutput;
 
 public class SVGFormatter implements BarcodeFormatter {
 	private static final String [] UNITS = {"in", "px", "cm", "mm"};

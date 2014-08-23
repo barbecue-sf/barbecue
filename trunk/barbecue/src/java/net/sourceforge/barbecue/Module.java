@@ -26,10 +26,10 @@
 
 package net.sourceforge.barbecue;
 
+import java.util.Arrays;
+
 import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.OutputException;
-
-import java.util.Arrays;
 
 /**
  * Internal class that is used to organise barcode data into groups of bars.

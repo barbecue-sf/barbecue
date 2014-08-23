@@ -26,6 +26,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.linear.code128;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeTestCase;
@@ -34,12 +42,6 @@ import net.sourceforge.barbecue.CompositeModule;
 import net.sourceforge.barbecue.GraphicsMock;
 import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.env.EnvironmentFactory;
-
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Code128BarcodeTest extends BarcodeTestCase {
 	private Code128Barcode barcode;
@@ -264,7 +266,7 @@ public class Code128BarcodeTest extends BarcodeTestCase {
 		assertEquals(ModuleFactory.getModule("25", Code128Barcode.C), data[5]);
 		assertEquals(ModuleFactory.getModule("91", Code128Barcode.C), data[6]);
 
-		assertEquals(ModuleFactory.getModule("Ç", Code128Barcode.B), barcode.calculateChecksum());
+		assertEquals(ModuleFactory.getModule("ï¿½", Code128Barcode.B), barcode.calculateChecksum());
     }
 
     public void testCanCodeChangeFromBToCWithOddNumberOfCCharsAndMixedAlphaNum() throws Exception {
@@ -331,7 +333,7 @@ public class Code128BarcodeTest extends BarcodeTestCase {
 			Color.white,
 			g.getColor()
 		};
-		List colors = g.getColors();
+		List<Color> colors = g.getColors();
 		assertEquals(10, colors.size());
 		for (int i=0; i<colors.size(); i++) {
 			Color color = (Color) colors.get(i);
@@ -339,7 +341,7 @@ public class Code128BarcodeTest extends BarcodeTestCase {
 		}
 		int[] expectedRects = new int[] {0, 2, 4, 6, 4, 4, 2, 0, 0};
 		int x = 0;
-		List rects = g.getRects();
+		List<Rectangle> rects = g.getRects();
 		assertEquals(9, rects.size());
 		for (int i=0; i<rects.size(); i++) {
 			Rectangle rect = (Rectangle) rects.get(i);
@@ -356,7 +358,7 @@ public class Code128BarcodeTest extends BarcodeTestCase {
 		barcode.setDrawingText(false);
 		barcode.draw(g, 0, 0);
 		int[] expected = new int[] {4, 2, 2, 4, 2, 8};
-		List rects = g.getRects();
+		List<Rectangle> rects = g.getRects();
 		assertEquals(expected[0], new Double(((Rectangle) rects.get(1)).getWidth()).intValue());
 		assertEquals(expected[1], new Double(((Rectangle) rects.get(2)).getWidth()).intValue());
 		assertEquals(expected[2], new Double(((Rectangle) rects.get(3)).getWidth()).intValue());
@@ -384,8 +386,8 @@ public class Code128BarcodeTest extends BarcodeTestCase {
             b.setBarWidth(width);
             GraphicsMock g = new GraphicsMock();
             b.draw(g, 0, 0);
-            List rects = g.getRects();
-            for (Iterator iterator = rects.iterator(); iterator.hasNext();) {
+            List<Rectangle> rects = g.getRects();
+            for (Iterator<Rectangle> iterator = rects.iterator(); iterator.hasNext();) {
                 Rectangle rectangle = (Rectangle) iterator.next();
                 assertTrue(rectangle.getWidth() >= 1);
             }
@@ -514,7 +516,7 @@ public class Code128BarcodeTest extends BarcodeTestCase {
 		assertEquals(ModuleFactory.getModule("B", Code128Barcode.B), data[6]);
 		assertEquals(ModuleFactory.getModule("Q", Code128Barcode.B), data[7]);
 
-		assertEquals(ModuleFactory.getModule("Ã", Code128Barcode.B), b.calculateChecksum());
+		assertEquals(ModuleFactory.getModule("ï¿½", Code128Barcode.B), b.calculateChecksum());
 	}
 
 	public void testComplexOptimalBarcodeUsesCorrectShiftsAndChanges() throws Exception {
@@ -824,6 +826,8 @@ public class Code128BarcodeTest extends BarcodeTestCase {
 	}
 
 	private class DataOnlyCode128 extends Code128Barcode {
+		private static final long serialVersionUID = 3955522594825252423L;
+
 		public DataOnlyCode128(String data) throws BarcodeException {
 			super(data);
 		}

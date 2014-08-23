@@ -26,16 +26,16 @@
 
 package net.sourceforge.barbecue.linear.codabar;
 
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BlankModule;
 import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.SeparatorModule;
 import net.sourceforge.barbecue.linear.LinearBarcode;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
 
 /**
  * This is a concrete implementation of the Codabar barcode, AKA USD-4, Monarch,
@@ -57,7 +57,9 @@ import java.text.StringCharacterIterator;
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
 public class CodabarBarcode extends LinearBarcode {
-    /** The default codabar start character */
+	private static final long serialVersionUID = -2969242750724602740L;
+	
+	/** The default codabar start character */
     public static final String DEFAULT_START = "A";
     /** The default codabar stop character */
     public static final String DEFAULT_STOP  = "C";

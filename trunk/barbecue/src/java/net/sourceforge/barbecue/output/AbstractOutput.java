@@ -26,7 +26,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.output;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 
 /**
  * Abstract class of which concrete implementations provide means for outputting

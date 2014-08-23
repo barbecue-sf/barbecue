@@ -3,6 +3,7 @@ package net.sourceforge.barbecue.linear;
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.font.TextLayout;
+import java.util.List;
 
 import junit.framework.TestCase;
 import net.sourceforge.barbecue.BarcodeException;
@@ -106,7 +107,7 @@ public class LinearBarcodeTest extends TestCase {
         TextOnlyBarcode barcode = new TextOnlyBarcode("12345");
         GraphicsMock g = new GraphicsMock();
         barcode.draw(g, 54, 37);
-        java.util.List colors = g.getColors();
+        List<Color> colors = g.getColors();
         assertEquals(3, colors.size());
         assertEquals(barcode.getForeground(), colors.get(1));
         assertTrue(barcode.textDrawn);
@@ -114,7 +115,9 @@ public class LinearBarcodeTest extends TestCase {
     }
 
     public class TextOnlyBarcode extends LinearBarcode {
-        private boolean textDrawn;
+		private static final long serialVersionUID = 1472116532101370396L;
+		
+		private boolean textDrawn;
 
         public TextOnlyBarcode(String data) throws BarcodeException {
             super(data);
@@ -144,7 +147,9 @@ public class LinearBarcodeTest extends TestCase {
     }
 
     public class BarcodeMock extends LinearBarcode {
-        private boolean encodedData          = false;
+		private static final long serialVersionUID = -1300406835400286773L;
+		
+		private boolean encodedData          = false;
         private boolean calculatedCheckDigit = false;
         private boolean gotPreamble          = false;
         private boolean gotPostamble         = false;

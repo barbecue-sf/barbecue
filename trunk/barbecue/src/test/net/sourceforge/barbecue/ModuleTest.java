@@ -26,14 +26,15 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue;
 
-import junit.framework.TestCase;
-
-import java.util.List;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
-import net.sourceforge.barbecue.output.Output;
+import junit.framework.TestCase;
 import net.sourceforge.barbecue.output.GraphicsOutput;
+import net.sourceforge.barbecue.output.Output;
 
 public class ModuleTest extends TestCase {
 	
@@ -60,7 +61,7 @@ public class ModuleTest extends TestCase {
 
 		Module mod = new Module(new int[] {2, 4});
 		mod.draw(environ, 0, 0, 2, 44);
-		List rects = g.getRects();
+		List<Rectangle> rects = g.getRects();
 		assertEquals(2, rects.size());
 		assertEquals(0, new Double(((Rectangle) rects.get(0)).getX()).intValue());
 		assertEquals(4, new Double(((Rectangle) rects.get(0)).getWidth()).intValue());

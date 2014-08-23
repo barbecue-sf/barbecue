@@ -1,5 +1,7 @@
-import java.awt.print.*;
-import net.sourceforge.barbecue.*;
+import java.awt.print.PrinterJob;
+
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.BarcodeFactory;
 
 /**
  * 

@@ -26,6 +26,12 @@
 
 package net.sourceforge.barbecue.linear.upc;
 
+import java.awt.Dimension;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.linear.LinearBarcode;
@@ -33,19 +39,15 @@ import net.sourceforge.barbecue.output.LabelLayoutFactory;
 import net.sourceforge.barbecue.output.Output;
 import net.sourceforge.barbecue.output.OutputException;
 
-import java.awt.*;
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * This is a concrete implementation of the UPC-A barcode.
  * 
  * @author <a href="mailto:james@metalskin.com">James Jenner</a>
  */
 public class UPCABarcode extends LinearBarcode {
-    /**
+	private static final long serialVersionUID = -6929967419810210335L;
+	
+	/**
      * A list of type identifiers for the UPC-A barcode format
      */
     public static final String[] TYPES                = new String[] { "UPC-A",

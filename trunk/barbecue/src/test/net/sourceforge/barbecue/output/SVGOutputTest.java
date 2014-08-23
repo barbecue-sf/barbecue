@@ -26,16 +26,17 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.output;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
+import java.io.StringWriter;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+
 import net.sourceforge.barbecue.BarcodeTestCase;
 import net.sourceforge.barbecue.env.DefaultEnvironment;
-
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.font.TextLayout;
-import java.awt.font.FontRenderContext;
-import java.io.StringWriter;
-import java.text.StringCharacterIterator;
-import java.text.CharacterIterator;
 
 public class SVGOutputTest extends BarcodeTestCase {
 	private SVGOutput output;

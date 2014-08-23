@@ -26,19 +26,6 @@
 
 package net.sourceforge.barbecue;
 
-import net.sourceforge.barbecue.env.EnvironmentFactory;
-import net.sourceforge.barbecue.env.HeadlessEnvironment;
-import net.sourceforge.barbecue.linear.code128.Code128Barcode;
-import net.sourceforge.barbecue.linear.ean.UCCEAN128Barcode;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,6 +35,20 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import net.sourceforge.barbecue.env.EnvironmentFactory;
+import net.sourceforge.barbecue.env.HeadlessEnvironment;
+import net.sourceforge.barbecue.linear.code128.Code128Barcode;
+import net.sourceforge.barbecue.linear.ean.UCCEAN128Barcode;
 
 public class BarcodeServletTest extends BarcodeTestCase {
 
@@ -228,7 +229,9 @@ public class BarcodeServletTest extends BarcodeTestCase {
     }
 
     class BarcodeServletMock extends BarcodeServlet {
-        Barcode barcode;
+		private static final long serialVersionUID = -8849329406386229255L;
+		
+		Barcode barcode;
 
         protected Barcode getBarcode(String type, String data, String appId,
                 boolean checkSum) throws ServletException {
@@ -369,7 +372,7 @@ public class BarcodeServletTest extends BarcodeTestCase {
     }
 
     class HttpServletRequestMock implements HttpServletRequest {
-        private Map params;
+        private Map<String, String> params;
 
         public String getAuthType() {
             return null;
@@ -391,11 +394,11 @@ public class BarcodeServletTest extends BarcodeTestCase {
             return null;
         }
 
-        public Enumeration getHeaderNames() {
+        public Enumeration<String> getHeaderNames() {
             return null;
         }
 
-        public Enumeration getHeaders(String s) {
+        public Enumeration<String> getHeaders(String s) {
             return null;
         }
 
@@ -475,7 +478,7 @@ public class BarcodeServletTest extends BarcodeTestCase {
             return null;
         }
 
-        public Enumeration getAttributeNames() {
+        public Enumeration<String> getAttributeNames() {
             return null;
         }
 
@@ -499,7 +502,7 @@ public class BarcodeServletTest extends BarcodeTestCase {
             return null;
         }
 
-        public Enumeration getLocales() {
+        public Enumeration<Locale> getLocales() {
             return null;
         }
 
@@ -507,11 +510,11 @@ public class BarcodeServletTest extends BarcodeTestCase {
             return (String) params.get(s);
         }
 
-        public Map getParameterMap() {
+        public Map<String, String> getParameterMap() {
             return params;
         }
 
-        public Enumeration getParameterNames() {
+        public Enumeration<String> getParameterNames() {
             return null;
         }
 
@@ -569,7 +572,7 @@ public class BarcodeServletTest extends BarcodeTestCase {
                 throws UnsupportedEncodingException {
         }
 
-        public void setParameters(Map params) {
+        public void setParameters(Map<String, String> params) {
             this.params = params;
         }
     }

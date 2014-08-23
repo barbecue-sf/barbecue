@@ -26,7 +26,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue.env;
 
-import java.awt.*;
+import java.awt.Font;
 
 /**
  * An environment used when absolutely no AWT activity is desired when

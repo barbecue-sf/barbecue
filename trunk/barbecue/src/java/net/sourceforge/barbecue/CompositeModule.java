@@ -26,12 +26,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 package net.sourceforge.barbecue;
 
-import net.sourceforge.barbecue.output.Output;
-import net.sourceforge.barbecue.output.OutputException;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import net.sourceforge.barbecue.output.Output;
+import net.sourceforge.barbecue.output.OutputException;
 
 /**
  * Specific implementation of Module that allows the grouping of multiple

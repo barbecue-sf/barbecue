@@ -96,7 +96,7 @@ public class Std2of5BarcodeTest extends TestCase {
             1, 1, 1, 1, 3, 1, 3, 1, 1, 1, // 0
             2, 1, 1, 1, 2, 1 // stop char
         };
-        List rects = g.getRects();
+        List<Rectangle> rects = g.getRects();
         assertEquals(92, rects.size());
         for (int i=0; i<rects.size(); i++) {
             Rectangle rectangle = (Rectangle) rects.get(i);

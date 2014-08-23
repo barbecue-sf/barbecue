@@ -26,7 +26,9 @@
 
 package net.sourceforge.barbecue.output;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.font.TextLayout;
 
 /**

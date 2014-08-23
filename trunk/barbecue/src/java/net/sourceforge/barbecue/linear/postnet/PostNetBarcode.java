@@ -3,19 +3,20 @@
  */
 package net.sourceforge.barbecue.linear.postnet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.Module;
 import net.sourceforge.barbecue.linear.LinearBarcode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Brendon Anderson
  */
 public class PostNetBarcode extends LinearBarcode {
-
-    protected final static int HEIGHT = 20;
+	private static final long serialVersionUID = 5667056172376568155L;
+	
+	protected final static int HEIGHT = 20;
 
     public PostNetBarcode(String zipcode) throws BarcodeException {
         super(zipcode);

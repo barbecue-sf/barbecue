@@ -1,13 +1,13 @@
 
 package net.sourceforge.barbecue;
 
-import net.sourceforge.barbecue.env.DefaultEnvironment;
-import net.sourceforge.barbecue.output.SVGOutput;
-import net.sourceforge.barbecue.output.EPSOutput;
-
-import java.io.OutputStream;
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+
+import net.sourceforge.barbecue.env.DefaultEnvironment;
+import net.sourceforge.barbecue.output.EPSOutput;
+import net.sourceforge.barbecue.output.SVGOutput;
 
 /**
 	Provide a command line interface to simulate GNU barcode. Options available are

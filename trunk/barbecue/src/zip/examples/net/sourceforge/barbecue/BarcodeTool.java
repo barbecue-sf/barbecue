@@ -62,7 +62,9 @@ import net.sourceforge.barbecue.formatter.SVGFormatter;
  * @author <a href="mailto:opensource@ianbourke.com">Ian Bourke</a>
  */
 public class BarcodeTool extends JFrame {
-    private static final String[] barcodeData = {
+	private static final long serialVersionUID = -7777043358630287651L;
+
+	private static final String[] barcodeData = {
             "Code128",
             "Creates a Code 128 barcode that dynamically switches between character sets to "
                     + "give the smallest possible encoding. This will encode  all numeric characters, "
@@ -98,7 +100,7 @@ public class BarcodeTool extends JFrame {
 
     private JLabel                appIDLabel;
     private JTextField            appIDTextField;
-    private JComboBox             barcodeSelection;
+    private JComboBox<String>     barcodeSelection;
     private JTextField            dataField;
     private JPanel                barcodePanel;
 
@@ -214,7 +216,7 @@ public class BarcodeTool extends JFrame {
         JPanel barcodeSelectionPanel = new JPanel();
         barcodeSelectionPanel.add(typeLabel);
 
-        barcodeSelection = new JComboBox(getBarcodeTypes());
+        barcodeSelection = new JComboBox<String>(getBarcodeTypes());
         barcodeSelection.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent evt) {
                 barcodeSelected();
